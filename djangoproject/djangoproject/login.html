@@ -4,22 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <title>App Login</title>
-
+    <link rel="stylesheet" type="text/css" href="CSS/login.css">
 </head>
 <body>
-<form action = "postsign" method = "post">
-    <div>Username/Email Address
+<form action = "postsign" method = "post" id="login">
+    <div id="user">Username
     <input type = "username" name = "username/email">
     </div>
-    <div>
+    <br />
+    <div id="passcode">
     Password
     <input type = "password" name = "pass">
     </div>
+    <br />
+
+
+
     <div>
-    <button type = "loginButton">
+    <button type = "loginButton">Login
     </button>
     </div>
 
+    <div id="forgot">
+    <a href="resetpassword.html">Forgot Password?</a>
+    </div>
 </form>
 </body>
 </html>
