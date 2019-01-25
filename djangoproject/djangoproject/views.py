@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 import pyrebase
 
 config = {
@@ -17,4 +16,4 @@ firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 
 def login(request):
-    return render(request,"login.html")
+    return render(request, './login.html')
