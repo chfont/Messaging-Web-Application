@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>App Login</title>
-    <link rel="stylesheet" type="text/css" title="blue" href="CSS/login.css">
+    <link rel="stylesheet" type="text/css" title="blue" href="{% static './CSS/login.css'%}">
 </head>
 <script>
   function changeColor(color)
@@ -22,21 +23,13 @@
       <option value="red" onclick = changeColor(value)>red</option>
     </select>
   </div>
-<form action = "postsign" method = "post" id="login">
-    <div id="user">Username
-    <input type = "username" name = "username/email">
-    </div>
-    <br />
-    <div id="passcode">
-    Password
-    <input type = "password" name = "pass">
-    </div>
-    <br />
-
-
+<form method = "post" id="login">
+    {% csrf_token %}
+    {{form}}
 
     <div>
     <button type = "submit" href="appInterface.html">Login
+
     </button>
     </div>
 
