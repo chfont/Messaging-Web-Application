@@ -1,0 +1,11 @@
+body{
+  background-color: #309fff;
+}
+
+#box
+{
+  background-color: #2ebdff;
+  text-align: center;
+  margin:20% 40% 0% 40%;
+  padding: 20px 0px 20px 0px;
+}
