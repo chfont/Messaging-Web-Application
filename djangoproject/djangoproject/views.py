@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import pyrebase
 
 config = {
@@ -21,3 +21,5 @@ def newuser(request):
     return render(request, './registeruser.html')
 def resetpassword(request):
     return render(request, './resetpassword.html')
+def rootToLogin(request):
+    return redirect(login)

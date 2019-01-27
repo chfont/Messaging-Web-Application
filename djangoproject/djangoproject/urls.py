@@ -19,7 +19,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.login, name='login'),
+    path('', views.rootToLogin, name='login'),
     path('registeruser.html', views.newuser, name='registeruser'),
     path('login.html', views.login, name='login'),
     path('resetpassword.html', views.resetpassword, name='pReset'),
