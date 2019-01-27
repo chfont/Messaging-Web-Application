@@ -17,3 +17,7 @@ auth = firebase.auth()
 
 def login(request):
     return render(request, './login.html')
+def newuser(request):
+    return render(request, './registeruser.html')
+def resetpassword(request):
+    return render(request, './resetpassword.html')
