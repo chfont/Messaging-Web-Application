@@ -23,3 +23,5 @@ def resetpassword(request):
     return render(request, './resetpassword.html')
 def rootToLogin(request):
     return redirect(login)
+def appInterface(request):
+    return render(request,'./appInterface.html')

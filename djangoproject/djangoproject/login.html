@@ -5,11 +5,22 @@
     <meta charset="UTF-8">
     <title>App Login</title>
     <link rel="stylesheet" type="text/css" title="blue" href="CSS/login.css">
-    <link rel="alternate stylesheet" type="text/css" title="green" href="CSS/loginGreen.css">
 </head>
+<script>
+  function changeColor(color)
+  {
+    document.body.style.background = color;
+  }
+</script>
 <body>
   <div id="dropdownmenu">
-    <button onclick="showOptions()" class="ddbutton">Change Theme</button>
+    <select>
+      <option value="placeholder"></option>
+      <option value="green" onclick = changeColor(value)>green</option>
+      <option value="blue" onclick = changeColor(value)>blue</option>
+      <option value="yellow" onclick = changeColor(value)>yellow</option>
+      <option value="red" onclick = changeColor(value)>red</option>
+    </select>
   </div>
 <form action = "postsign" method = "post" id="login">
     <div id="user">Username

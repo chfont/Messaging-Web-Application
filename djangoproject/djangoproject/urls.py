@@ -23,4 +23,5 @@ urlpatterns = [
     path('registeruser.html', views.newuser, name='registeruser'),
     path('login.html', views.login, name='login'),
     path('resetpassword.html', views.resetpassword, name='pReset'),
+    path('appInterface.html',views.appInterface,name='main')
 ]
