@@ -8,28 +8,10 @@
 </head>
 
 <body>
-  <form id="box">
-    <div id="input">
-    Username
-    <input></input>
-    </div>
-    <br />
-    <div id="input">
-      Password
-      <input></input>
-    </div>
-    <br />
-    <div id="input">
-      Confirm Password
-      <input></input>
-    </div>
-    <br />
-    <div id="input">
-      Recovery Email
-      <input></input>
-     </div>
-     <br />
-     <div id="create"><button type = "button" >Create User
+  <form id="box" method = "post">
+    {% csrf_token %}
+    {{form}}
+     <div id="create"><button type = "submit" >Create User
      </button></div>
      <a href="login.html">Return to login</a>
   </form>

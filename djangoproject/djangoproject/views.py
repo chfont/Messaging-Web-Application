@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 import pyrebase
-from .forms import LoginForm
+from .forms import LoginForm, NewUser
 config = {
     "apiKey": "AIzaSyBYm7w0kt_NvWmH9GE1vI9ckN9SrXdHJgw",
     "authDomain": "loginauth-80e28.firebaseapp.com",
@@ -20,14 +20,22 @@ def login(request):
         #Data has been submitted
         form = LoginForm(request.POST)
         if form.is_valid():
-            return redirect(login)
+            return redirect(appInterface)
         else:
             return redirect(login)
     else:
         form = LoginForm()
     return render(request, './login.html', {'form' : form})
 def newuser(request):
-    return render(request, './registeruser.html')
+    if (request.method == 'POST'):
+        form = NewUser(request.POST)
+        if form.is_valid():
+            return redirect(appInterface)
+        else:
+            return redirect(newuser)
+    else:
+        form = NewUser()
+    return render(request, './registeruser.html', {'form': form})
 def resetpassword(request):
     return render(request, './resetpassword.html')
 def rootToLogin(request):

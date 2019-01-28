@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+{% load static from staticfiles %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-
+    <link rel="stylesheet" type="text/css" href="{% static 'mainInterface.css' %}">
 </head>
 <body>
 <p style = "text-align: center;
@@ -13,5 +14,8 @@ padding: 20px 0px 20px 0px;">Click on one of the conversations or make a new one
 <button style = "text-align: center; margin:20% 40% 0% 40%;
 padding: 20px 0px 20px 0px;">Make New Convo</button>
 <button>Load Convos</button>
+<form action="login.html">
+  <input type="submit" value="logout"></input>
+</form>
 </body>
 </html>
