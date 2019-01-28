@@ -30,7 +30,12 @@ def newuser(request):
     if (request.method == 'POST'):
         form = NewUser(request.POST)
         if form.is_valid():
-            return redirect(appInterface)
+            if(form.cleaned_data['password'] != form.cleaned_data['confirmPassword']):   #Is this secure?
+                return redirect(newuser)
+            else:
+                #Valid data probably
+                user = auth.create_user_with_email_and_password(form.cleaned_data['recovEmail'], form.cleaned_data['password'])
+                return redirect(appInterface)
         else:
             return redirect(newuser)
     else:
