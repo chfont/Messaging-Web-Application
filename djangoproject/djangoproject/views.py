@@ -53,3 +53,5 @@ def rootToLogin(request):
     return redirect(login)
 def appInterface(request):
     return render(request,'./appInterface.html')
+def settings(request):
+    return render(request, './settings.html')
