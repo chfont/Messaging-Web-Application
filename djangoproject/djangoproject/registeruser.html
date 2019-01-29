@@ -10,7 +10,18 @@
 <body>
   <form id="box" method = "post">
     {% csrf_token %}
-    {{form}}
+    <div id="input">
+    Email:
+    {{form.email}}
+    </div>
+    <div id="input">
+      Password:
+      {{form.password}}
+    </div>
+    <div id="input">
+      Confirm Password:
+      {{form.confirmPassword}}
+    </div>
      <div id="create"><button type = "submit" >Create User
      </button></div>
      <a href="login.html">Return to login</a>

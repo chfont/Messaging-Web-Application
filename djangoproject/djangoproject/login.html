@@ -28,8 +28,14 @@
   </div>
 <form method = "post" id="login">
     {% csrf_token %}
-    {{form}}
-
+    <div id="user">
+      Email:
+    {{form.user}}
+    </div>
+    <div id="passcode">
+      Password:
+      {{form.passcode}}
+    </div>
     <div>
     <button type = "submit">Login
 
