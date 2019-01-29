@@ -1,4 +1,26 @@
 body
 {
-  background-color: #309fff;
+  background-color: #161087;
+  color: white;
+}
+
+.sidebar
+{
+  float: left;
+  text-align:center;
+  width: 15%;
+  border-right-style:solid;
+  border-right-width: 2px;
+  border-right-color: white;
+}
+
+.mainpane
+{
+  float:left;
+  width: 100%;
+}
+
+#logout
+{
+  float: right;
 }
