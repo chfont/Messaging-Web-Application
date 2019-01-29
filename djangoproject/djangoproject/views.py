@@ -20,6 +20,12 @@ def login(request):
         #Data has been submitted
         form = LoginForm(request.POST)
         if form.is_valid():
+            try:
+                user = auth.sign_in_with_email_and_password(form.cleaned_data['user'], form.cleaned_data['passcode'])
+            except:
+                error = "Invalid Credentials Entered, Please Try Again"
+                form = LoginForm()
+                return render(request, './login.html', {'form' : form}, {'error' : error})
             return redirect(appInterface)
         else:
             return redirect(login)

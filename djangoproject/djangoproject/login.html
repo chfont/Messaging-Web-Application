@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+{%if error%}
+<script>alert('{{ error }}');</script>
+{% endif %}
 {% load static from staticfiles %}
 <html lang="en">
 
