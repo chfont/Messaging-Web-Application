@@ -40,7 +40,11 @@ def newuser(request):
                 return redirect(newuser)
             else:
                 #Valid data probably
-                user = auth.create_user_with_email_and_password(form.cleaned_data['email'], form.cleaned_data['password'])
+                try:
+                    user = auth.create_user_with_email_and_password(form.cleaned_data['email'], form.cleaned_data['password'])
+                except:
+                    form = NewUser()
+                    return render(request, './registeruser.html', {'form': form})
                 return redirect(appInterface)
         else:
             return redirect(newuser)
