@@ -1,10 +1,7 @@
 from django.shortcuts import render, redirect
 import pyrebase
 from .forms import LoginForm, NewUser
-config = {
-    "null"
-
-}
+from .config import config
 
 firebase = pyrebase.initialize_app(config)
 
