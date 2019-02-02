@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" type="text/css" href="{% static 'mainInterface.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'button.css'%}"
 </head>
 <body>
   <div class = "sidebar">
@@ -13,7 +14,9 @@
     <button>Load Convos</button>
   </div>
   <div class = "mainpane">
-    <button>Settings</button>
+    <form action="settings.html" id="settings">
+      <input type="submit" value = "Settings"></input>
+    </form>
     <form action="login.html" id="logout">
       <input type="submit" value="logout"></input>
     </form>

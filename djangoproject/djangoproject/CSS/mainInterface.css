@@ -12,6 +12,7 @@ body
   border-right-style:solid;
   border-right-width: 2px;
   border-right-color: white;
+  height: 100%;
 }
 
 .mainpane
