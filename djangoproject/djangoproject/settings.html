@@ -1,9 +1,19 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>Settings</title>
   <meta charset="UTF-8"/>
+  <title>Settings</title>
+  <link rel="stylesheet" type="text/css" title="blue" href="{% static 'login.css'%}">
 </head>
 <body>
+    <div id="dropdownmenu">
+        <select>
+          <option value="placeholder">Choose A Theme</option>
+          <option value="green" onclick = changeColor(value)>Green</option>
+          <option value="blue" onclick = changeColor(value)>Blue</option>
+          <option value="yellow" onclick = changeColor(value)>Yellow</option>
+          <option value="red" onclick = changeColor(value)>Red</option>
+        </select>
+      </div>
 </body>
 </html>
