@@ -1,0 +1,15 @@
+button
+{
+ background-color: #3832ad;
+ color: white;
+ border: none;
+ padding: 5px 5px 5px 5px;
+}
+
+.darkbutton
+{
+  background-color:  #161087;
+  color:white;
+  border:none;
+  padding: 5px;
+}
