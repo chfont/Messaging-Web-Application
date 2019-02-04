@@ -47,3 +47,22 @@ a:visited{color: white;}
 {
   border: none;
 }
+
+#backhome
+{
+  float:left;
+}
+
+#savetheme
+{
+  text-align: center;
+  margin:20% 40% 0% 40%;
+  padding: 20px 0px 20px 0px;
+}
+
+#setusername
+{
+  text-align:center;
+  margin:20% 40% 10% 40%;
+  padding: 20px 0px 20px 0px;
+}
