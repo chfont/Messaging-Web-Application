@@ -8,6 +8,9 @@
 </head>
 <script src="{% static 'settings.js'%}"></script>
 <body>
+<form action="appInterface.html" id="backhome">
+  <input type="submit" value="Back To Home"></input>
+</form>
     <div id="dropdownmenu">
         <select>
           <option value="placeholder">Choose A Theme</option>
@@ -17,5 +20,8 @@
           <option value="red" onclick = changeTheme(value)>Red</option>
         </select>
       </div>
+<form id ="savetheme">
+  <input type="submit" value="Save Theme"></input>
+</form>
 </body>
 </html>
