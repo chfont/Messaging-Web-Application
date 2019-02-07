@@ -2,10 +2,10 @@ import pyrebase, json
 from .config import config
 
 
+firebase = pyrebase.initialize_app(config)
+db = firebase.database()
 
 def addData( username, email, themeID):
-    firebase = pyrebase.initialize_app(config)
-    db = firebase.database()
 
     data = {"name": username, "email": email, "themeID": themeID}
     db.child('users').child(username).set(data)
