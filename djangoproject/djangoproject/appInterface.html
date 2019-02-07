@@ -8,11 +8,24 @@
     <link rel="stylesheet" type="text/css" href="{% static 'mainInterface.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'button.css'%}">
 </head>
+<script src="{% static 'mainInterface.js'%}"></script>
 <body>
+  <div class="dialog" id="chatpopup">
+    <form method="post" id="newConv">
+      {% csrf_token %}
+      <div id = "titleField">
+        Title:
+        {{form.title}}
+      </div>
+      <button type="submit" class="darkbutton">Create</button>
+    </form>
+
+  </div>
   <div class = "sidebar">
-    <button style = "text-align: center;">Make New Chat</button>
+    <button style = "text-align: center;" id="newText" onclick="newChatPopUp()">Make New Chat</button>
     <button>Load Convos</button>
   </div>
+
   <div class = "mainpane">
     <form action="settings.html" id="settings">
       <input type="submit" value = "Settings"></input>

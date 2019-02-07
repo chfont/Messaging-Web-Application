@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 import pyrebase
-from .forms import LoginForm, NewUser
+from .forms import LoginForm, NewUser, NewConv
 from .config import config
 from .database import *
 
@@ -51,6 +51,7 @@ def resetpassword(request):
 def rootToLogin(request):
     return redirect(login)
 def appInterface(request):
-    return render(request,'./appInterface.html')
+    form = NewConv()
+    return render(request,'./appInterface.html', {'form': form})
 def settings(request):
     return render(request, './settings.html')

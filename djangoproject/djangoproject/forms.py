@@ -9,3 +9,6 @@ class NewUser(forms.Form):
     username = forms.CharField(label="Username", max_length=512)
     password = forms.CharField(label="Password", max_length=512, widget=forms.PasswordInput)
     confirmPassword = forms.CharField(label="Confirm Password", max_length=512, widget=forms.PasswordInput)
+
+class NewConv(forms.Form):
+    title= forms.CharField(label="Title", max_length=64)
