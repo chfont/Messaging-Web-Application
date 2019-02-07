@@ -11,12 +11,6 @@
     <link rel="stylesheet" type="text/css" title="blue" href="{% static 'login.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'button.css'%}">
 </head>
-<script>
-  function changeColor(color)
-  {
-    document.body.style.background = color;
-  }
-</script>
 <body>
 <form method = "post" id="login">
     {% csrf_token %}
