@@ -1,4 +1,4 @@
 function newChatPopUp()
 {
-  document.getElementbyId("chatpopup").style.display = block
+  document.getElementbyId("chatpopup").style.display = block;
 }
