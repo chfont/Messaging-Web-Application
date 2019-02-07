@@ -6,5 +6,6 @@ class LoginForm(forms.Form):
 
 class NewUser(forms.Form):
     email = forms.CharField(label="Recovery Email", max_length=512)
+    username = forms.CharField(label="Username", max_length=512)
     password = forms.CharField(label="Password", max_length=512, widget=forms.PasswordInput)
     confirmPassword = forms.CharField(label="Confirm Password", max_length=512, widget=forms.PasswordInput)

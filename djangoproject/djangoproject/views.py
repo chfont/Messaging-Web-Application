@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 import pyrebase
 from .forms import LoginForm, NewUser
 from .config import config
+from .database import *
 
 firebase = pyrebase.initialize_app(config)
 
@@ -34,6 +35,8 @@ def newuser(request):
                 #Valid data probably
                 try:
                     user = auth.create_user_with_email_and_password(form.cleaned_data['email'], form.cleaned_data['password'])
+                    addData(form.cleaned_data['username'], form.cleaned_data['email'], 0)
+                    print("Added data")
                 except:
                     form = NewUser()
                     return render(request, './registeruser.html', {'form': form})
