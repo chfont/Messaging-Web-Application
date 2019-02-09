@@ -15,7 +15,11 @@ def login(request):
         if form.is_valid():
             try:
                 user = auth.sign_in_with_email_and_password(form.cleaned_data['user'], form.cleaned_data['passcode'])
-                print(user['localId'])
+                uuid = user['localId']
+                udata = retrieveUserData(uuid)
+                userTheme = udata['themeID']
+                request.session['uid'] = uuid
+                request.session['theme'] = userTheme
             except:
                 error = "Invalid Credentials Entered, Please Try Again"
                 form = LoginForm()
