@@ -1,4 +1,8 @@
-function newChatPopUp()
+var btn = document.getElementById("newText");
+
+var modal = document.getElementById('chatpopup');
+
+btn.onclick = function()
 {
-  document.getElementbyId("chatpopup").style.display = block;
+  modal.style.display = "block";
 }
