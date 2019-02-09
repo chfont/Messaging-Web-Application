@@ -12,3 +12,4 @@ class NewUser(forms.Form):
 
 class NewConv(forms.Form):
     title= forms.CharField(label="Title", max_length=64)
+    key=forms.CharField(label="Key", max_length=64, required= False)
