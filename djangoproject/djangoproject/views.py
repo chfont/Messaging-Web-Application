@@ -15,6 +15,7 @@ def login(request):
         if form.is_valid():
             try:
                 user = auth.sign_in_with_email_and_password(form.cleaned_data['user'], form.cleaned_data['passcode'])
+                print(user['localId'])
             except:
                 error = "Invalid Credentials Entered, Please Try Again"
                 form = LoginForm()
@@ -35,7 +36,7 @@ def newuser(request):
                 #Valid data probably
                 try:
                     user = auth.create_user_with_email_and_password(form.cleaned_data['email'], form.cleaned_data['password'])
-                    addData(form.cleaned_data['username'], form.cleaned_data['email'], 0)
+                    addData(user['localId'], form.cleaned_data['username'], form.cleaned_data['email'], 0)
                     print("Added data")
                 except:
                     form = NewUser()
