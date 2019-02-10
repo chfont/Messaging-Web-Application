@@ -19,7 +19,7 @@ def login(request):
                 udata = retrieveUserData(uuid)
                 userTheme = udata['themeID']
                 request.session['uid'] = uuid
-                request.session['theme'] = userTheme
+                request.session['themeCSS'] = userTheme+ ".css"
             except:
                 error = "Invalid Credentials Entered, Please Try Again"
                 form = LoginForm()
@@ -64,7 +64,7 @@ def appInterface(request):
         return redirect(appInterface)
     else:
         form = NewConv()
-    return render(request,'./appInterface.html', {'form': form})
+    return render(request,'./appInterface.html', {'form': form, 'themeCSS': request.session['themeCSS']})
 
 def settings(request):
     if(request.method== 'POST'):
@@ -73,8 +73,9 @@ def settings(request):
             print(form.cleaned_data['id'])
             updateThemeID(request.session['uid'], form.cleaned_data['id'])
             request.session['theme'] = form.cleaned_data['id']
+            request.session['themeCSS'] = request.session['theme'] +".css"
             request.session.modified = True
     else:
         form = ThemeSelect()
 
-    return render(request, './settings.html', {'form': form})
+    return render(request, './settings.html', {'form': form, 'themeCSS': request.session['themeCSS']})

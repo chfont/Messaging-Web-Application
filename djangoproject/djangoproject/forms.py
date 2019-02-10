@@ -16,9 +16,9 @@ class NewConv(forms.Form):
 
 
 THEMES =[
-    (0, "Default"),
-    (1, "Light"),
-    (2, "Dark")
+    ("default", "Default"),
+    ("light", "Light"),
+    ("dark", "Dark")
 ]
 class ThemeSelect(forms.Form):
     id = forms.CharField(label="Select Theme:", widget=forms.Select(choices=THEMES))
