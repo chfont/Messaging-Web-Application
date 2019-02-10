@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 import pyrebase
-from .forms import LoginForm, NewUser, NewConv
+from .forms import *
 from .config import config
 from .database import *
 
@@ -55,8 +55,26 @@ def resetpassword(request):
     return render(request, './resetpassword.html')
 def rootToLogin(request):
     return redirect(login)
+
 def appInterface(request):
-    form = NewConv()
+    if(request.method =='POST'):
+        form = NewConv(request.POST)
+        if(form.is_valid()):
+            AddConv(request.session['uid'], form)
+        return redirect(appInterface)
+    else:
+        form = NewConv()
     return render(request,'./appInterface.html', {'form': form})
+
 def settings(request):
-    return render(request, './settings.html')
+    if(request.method== 'POST'):
+        form = ThemeSelect(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data['id'])
+            updateThemeID(request.session['uid'], form.cleaned_data['id'])
+            request.session['theme'] = form.cleaned_data['id']
+            request.session.modified = True
+    else:
+        form = ThemeSelect()
+
+    return render(request, './settings.html', {'form': form})

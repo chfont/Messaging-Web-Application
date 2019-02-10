@@ -16,15 +16,12 @@
   </form>
 </div>
     <div id="dropdownmenu">
-        <select>
-          <option value="#161087" onclick = changeTheme(value)>Choose A Theme</option>
-          <option value="#EAE6DA" onclick = changeTheme(value)>Light Theme</option>
-          <option value="#343148" onclick = changeTheme(value)>Dark Theme</option>
-        </select>
+        <form method = "post">
+          {%csrf_token%}
+          {{form.id}}
+          <button type="submit">Save Theme</button>
+        </form>
       </div>
-<form id ="savetheme">
-  <input type="submit" value="Save Theme"></input>
-</form>
 <form id = "setusername">
   <input type="submit" value="Change Username"></input>
 </form>
