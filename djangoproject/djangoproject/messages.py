@@ -1,16 +1,16 @@
 from datetime import datetime
 
-class Message
+class Message:
 
-    def __init__(self, s, m)
+    def __init__(self, s, m):
         self.sender = s
         self.timeStamp = datetime.now()
         self.text = m
 
 
-class Conversation
+class Conversation:
 
-    def __init(self, t, k)
+    def __init__(self, t, k):
         self.title = t
         self.key = k
         
