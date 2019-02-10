@@ -8,10 +8,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'mainInterface.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'button.css'%}">
 </head>
-<script src="{% static 'mainInterface.js'%}"></script>
 <body>
+  <script src="{% static 'mainInterface.js'%}"></script>
+  <div class ="modal">
   <div class="dialog" id="chatpopup">
-    <form method="post" id="newConv">
+    <span class="closemodal">&times;</span>
+    <form method="POST" id="newConv">
       {% csrf_token %}
       <div id = "titleField">
         Title:
@@ -23,11 +25,9 @@
       </div>
       <button type="submit" class="darkbutton">Create</button>
     </form>
-
+  </div>
   </div>
   <div class = "sidebar">
-    <button style = "text-align: center;" id="newText" onClick="newChatPopUp()">Make New Chat</button>
-    <button>Load Convos</button>
   </div>
 
   <div class = "mainpane">
@@ -39,5 +39,28 @@
     </form>
     <p style = "text-align: center;">Click on one of the conversations or make a new one!</p>
   </div>
+  <button onclick="document.getElementById('id01').style.display='block'" style="width:40%;" id="newChat">Make New Chat</button>
+  <button onclick="document.getElementById('id01').style.display='block'" style="width:40%;" id="loadChat">Load Convos</button>
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+    </div>
+
+    <div class="container">
+      <label for="uname"><b>Title</b></label>
+      <input type="password" placeholder="Chat Title" name="psw" required>
+      <label for="psw"><b>Password(Optonal)</b></label>
+      <input type="password" placeholder="Password(Optional)" name="psw" required>
+      <button type="submit">Create Chat</button>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      <span class="psw"><a href="#">Forgot password?</a></span>
+    </div>
+  </form>
+</div>
 </body>
 </html>
