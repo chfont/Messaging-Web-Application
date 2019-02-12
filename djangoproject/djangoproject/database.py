@@ -16,7 +16,7 @@ def retrieveUserData(id):
         return data.val()
 
 def addConv(id, convT, convK):
-    data = {"name": convT, "key": convK, "lastSent": time.time()}
+    data = {"name": convT, "key": convK, "lastSent": time()}
     db.child('users').child(id).child("Conversations").child(data['name']).set(data)
 
 def sortConversationsbyKey(sortKey, id):

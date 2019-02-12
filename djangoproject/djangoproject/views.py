@@ -3,7 +3,7 @@ import pyrebase
 from .forms import *
 from .config import config
 from .database import *
-
+from Crypto.Hash import SHA256
 firebase = pyrebase.initialize_app(config)
 
 auth = firebase.auth()
@@ -60,7 +60,8 @@ def appInterface(request):
     if(request.method =='POST'):
         form = NewConv(request.POST)
         if(form.is_valid()):
-            AddConv(request.session['uid'], form)
+            encKey = SHA256.new(form.cleaned_data['key'].encode('utf-8')).hexdigest()
+            addConv(request.session['uid'], form.cleaned_data['title'], encKey)
         return redirect(appInterface)
     else:
         form = NewConv()
