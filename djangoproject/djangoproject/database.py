@@ -19,8 +19,13 @@ def addConv(id, convT, convK):
     data = {"name": convT, "key": convK, "lastSent": time()}
     db.child('users').child(id).child("Conversations").child(data['name']).set(data)
 
+def getConvs(id):
+    data = db.child("users").child(id).child("Conversations").get()
+    return data.val()
+
+#Sort conversations by key, fails
 def sortConversationsbyKey(sortKey, id):
-    data = db.child("users").child(id).child("Conversations").order_by_child(key).get()
+    data = db.child("users").child(id).child("Conversations").order_by_child(sortKey).get()
     return data.val()
 
 def updateThemeID(id, val):

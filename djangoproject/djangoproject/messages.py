@@ -12,5 +12,4 @@ class Conversation:
 
     def __init__(self, t, k):
         self.title = t
-        self.key = k
-        
+        self.timeStamp = k

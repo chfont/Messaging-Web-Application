@@ -3,6 +3,7 @@ import pyrebase
 from .forms import *
 from .config import config
 from .database import *
+from .messages import *
 from Crypto.Hash import SHA256
 firebase = pyrebase.initialize_app(config)
 
@@ -57,6 +58,10 @@ def rootToLogin(request):
     return redirect(login)
 
 def appInterface(request):
+    convs = getConvs(request.session['uid'])
+    convos = []
+    for c in convs:
+        convos.append(Conversation(convs[c]['name'], convs[c]['lastSent']))
     if(request.method =='POST'):
         form = NewConv(request.POST)
         if(form.is_valid()):
@@ -65,7 +70,7 @@ def appInterface(request):
         return redirect(appInterface)
     else:
         form = NewConv()
-    return render(request,'./appInterface.html', {'form': form, 'themeCSS': request.session['themeCSS']})
+    return render(request,'./appInterface.html', {'form': form, 'convs':convos, 'themeCSS': request.session['themeCSS']})
 
 def settings(request):
     if(request.method== 'POST'):
