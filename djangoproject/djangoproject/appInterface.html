@@ -45,5 +45,12 @@
     <div id="convTag">{{c.title}}<br />{{c.timeStamp}}</div>
   {% endfor %}
 </div>
+<div>
+  Sort conversations
+  <form method="POST" id="newConv">
+    {% csrf_token %}
+    {{sort.sortId}}
+  </form>
+</div>
 </body>
 </html>

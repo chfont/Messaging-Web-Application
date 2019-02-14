@@ -4,6 +4,7 @@ from .forms import *
 from .config import config
 from .database import *
 from .messages import *
+from .sort import *
 from Crypto.Hash import SHA256
 firebase = pyrebase.initialize_app(config)
 
@@ -69,8 +70,7 @@ def appInterface(request):
             encKey = SHA256.new(form.cleaned_data['key'].encode('utf-8')).hexdigest()
             addConv(request.session['uid'], form.cleaned_data['title'], encKey)
         elif(sort.is_valid()):
-            print(sort.cleaned_data['sortId'])
-        return redirect(appInterface)
+            convos = sortConv(sort.cleaned_data['sortId'], convos)
     else:
         form = NewConv()
         sort = SortSelect()
