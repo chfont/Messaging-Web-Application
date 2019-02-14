@@ -20,5 +20,15 @@ THEMES =[
     ("light", "Light"),
     ("dark", "Dark")
 ]
+
+SORT =[
+    (0, "Name(A-Z)"),
+    (1, "Name(Z-A)"),
+    (2, "Recent"),
+    (3, "Old")
+]
 class ThemeSelect(forms.Form):
     id = forms.CharField(label="Select Theme:", widget=forms.Select(choices=THEMES))
+
+class SortSelect(forms.Form):
+    sortId = forms.CharField(widget=forms.Select(choices=SORT, attrs={'onchange': 'this.form.submit();'}))

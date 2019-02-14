@@ -64,13 +64,17 @@ def appInterface(request):
         convos.append(Conversation(convs[c]['name'], convs[c]['lastSent']))
     if(request.method =='POST'):
         form = NewConv(request.POST)
+        sort = SortSelect(request.POST)
         if(form.is_valid()):
             encKey = SHA256.new(form.cleaned_data['key'].encode('utf-8')).hexdigest()
             addConv(request.session['uid'], form.cleaned_data['title'], encKey)
+        elif(sort.is_valid()):
+            print(sort.cleaned_data['sortId'])
         return redirect(appInterface)
     else:
         form = NewConv()
-    return render(request,'./appInterface.html', {'form': form, 'convs':convos, 'themeCSS': request.session['themeCSS']})
+        sort = SortSelect()
+    return render(request,'./appInterface.html', {'form': form, 'sort':sort, 'convs':convos, 'themeCSS': request.session['themeCSS']})
 
 def settings(request):
     if(request.method== 'POST'):
