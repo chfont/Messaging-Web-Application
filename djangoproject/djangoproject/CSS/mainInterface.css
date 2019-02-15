@@ -42,13 +42,10 @@ body
 
 #newChat
 {
-  margin: 24px 400px;
+  margin: 40px 600px;
 }
 
-#loadChat
-{
-  margin: 24px 400px;
-}
+
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
