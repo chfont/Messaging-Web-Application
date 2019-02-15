@@ -21,7 +21,6 @@
     <p style = "text-align: center;">Click on one of the conversations or make a new one!</p>
   </div>
   <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" id="newChat">Make New Chat</button>
-  <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" id="loadChat">Load Convos</button>
 
 <div id="id01" class="modal">
     <form method="POST" id="newConv">
@@ -38,7 +37,6 @@
     </form>
     <button type="button" onclick="document.getElementById('id01').style.display='none'" id="cancel">Cancel</button>
 </div>
-
 <div id = "conversations" style="height: 400px; overflow-y: scroll">
   <b>Conversations</b>
   {% for c in convs %}
