@@ -38,7 +38,7 @@
     <button type="button" onclick="document.getElementById('id01').style.display='none'" id="cancel">Cancel</button>
 </div>
 <div id = "conversations" style="height: 400px; overflow-y: scroll">
-  <b>Conversations</b>
+  <b style="border: 2px solid black;">Conversations</b>
   {% for c in convs %}
     <div id="convTag">{{c.title}}<br />{{c.timeStamp}}</div>
   {% endfor %}
