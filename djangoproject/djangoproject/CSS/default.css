@@ -3,3 +3,11 @@ body
     background-color: #2E4A62;
     color: white;
 }
+
+#formBox
+{
+  background-color: #3832ad;
+}
+
+a{color: white;}
+a:visited{color: white;}

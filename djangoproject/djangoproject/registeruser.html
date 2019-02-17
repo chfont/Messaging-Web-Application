@@ -5,10 +5,11 @@
   <meta charset="UTF-8">
   <title>Register User</title>
   <link rel="stylesheet" type="text/css" title="blue" href="{% static 'newuser.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'default.css'%}">
 </head>
 
 <body>
-  <form id="box" method = "post">
+  <form id="formBox" method = "post">
     {% csrf_token %}
     <div id="input">
     Email:

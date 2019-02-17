@@ -1,11 +1,7 @@
-body{
-  background-color: #2E4A62;
-  color: white;
-}
 
-#login
+
+#formBox
 {
-  background-color: #3832ad;
   text-align: center;
   margin:20% 40% 0% 40%;
   padding: 20px 0px 20px 0px;

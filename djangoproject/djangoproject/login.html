@@ -10,9 +10,10 @@
     <title>App Login</title>
     <link rel="stylesheet" type="text/css" title="blue" href="{% static 'login.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'button.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'default.css'%}">
 </head>
 <body>
-<form method = "post" id="login">
+<form method = "post" id="formBox">
     {% csrf_token %}
     <div id="user">
       Email:
