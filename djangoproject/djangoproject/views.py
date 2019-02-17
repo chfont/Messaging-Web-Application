@@ -68,7 +68,8 @@ def appInterface(request):
         sort = SortSelect(request.POST)
         if(form.is_valid()):
             encKey = SHA256.new(form.cleaned_data['key'].encode('utf-8')).hexdigest()
-            addConv(request.session['uid'], form.cleaned_data['title'], encKey)
+            newConv = addConv(request.session['uid'], form.cleaned_data['title'], encKey)
+            convos.append(newConv)
         elif(sort.is_valid()):
             convos = sortConv(sort.cleaned_data['sortId'], convos)
     else:

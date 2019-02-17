@@ -13,3 +13,4 @@ class Conversation:
     def __init__(self, t, k):
         self.title = t
         self.timeStamp = k
+        self.dateTimeStamp = datetime.utcfromtimestamp(k)
