@@ -22,6 +22,7 @@ def login(request):
                 userTheme = udata['themeID']
                 request.session['uid'] = uuid
                 request.session['themeCSS'] = userTheme+ ".css"
+                request.session['username'] = udata['name']
             except:
                 error = "Invalid Credentials Entered, Please Try Again"
                 form = LoginForm()
@@ -41,14 +42,13 @@ def newuser(request):
             else:
                 #Valid data probably
                 try:
-                    print("t")
                     user = auth.create_user_with_email_and_password(form.cleaned_data['email'], form.cleaned_data['password'])
-                    print("u")
                     addData(user['localId'], form.cleaned_data['username'], form.cleaned_data['email'], 'default')
                     print("Added data")
                     request.session['uid'] = user['localId']
                     request.session['theme'] = 'default'
                     request.session['themeCSS'] = request.session['theme']+".css"
+                    request.session['username']= form.cleaned_data['username']
                 except:
                     form = NewUser()
                     return render(request, './registeruser.html', {'form': form})

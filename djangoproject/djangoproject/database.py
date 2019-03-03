@@ -17,7 +17,7 @@ def retrieveUserData(id):
         data = db.child("users").child(id).get()
         return data.val()
 
-def addConv(id, convT, convK, convRs, uid):
+def addConv(id, convT, convK, convRs, username):
     reps = convRs.split(",")
 
     data = {"name": convT, "key": convK, "lastSent": time()}
@@ -27,8 +27,7 @@ def addConv(id, convT, convK, convRs, uid):
     byt = rnd.read(16)
     byt = int.from_bytes(byt, byteorder='little')
     #check validity here
-    data3 = retrieveUserData(uid)
-    print(data3)
+    data3 = retrieveUserData(id)
     db.child('Conversations').child(byt).set(data2)
     c = Conversation(data['name'], data['lastSent'])
     return c
@@ -43,3 +42,7 @@ def sortConversationsbyKey(sortKey, id):
 
 def updateThemeID(id, val):
     db.child("users").child(id).update({"themeID": val})
+
+def pollConvs(id, username):
+    convList = db.child("Conversations").get().val()
+    print(type(convList))
