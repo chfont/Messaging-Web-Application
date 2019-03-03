@@ -3,24 +3,34 @@ from .config import config
 from datetime import datetime
 from time import time
 from .messages import *
+from Crypto import Random
 
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 def addData( id, username, email, themeID):
 
-    data = {"name": username, "email": email, "themeID": themeID}
+    data = {"name": username, "email": email, "themeID": themeID, "uid": id}
     db.child('users').child(id).set(data)
 
 def retrieveUserData(id):
         data = db.child("users").child(id).get()
         return data.val()
 
-def addConv(id, convT, convK):
+def addConv(id, convT, convK, convRs, uid):
+    reps = convRs.split(",")
+
     data = {"name": convT, "key": convK, "lastSent": time()}
+    data2 = {"name": convT, "lastSent": time(), "recipients": reps}
     db.child('users').child(id).child("Conversations").child(data['name']).set(data)
-    d = db.child('users').child(id).child("Conversations").child(convT).get().val()
-    c = Conversation(d['name'], d['lastSent'])
+    rnd = Random.new()
+    byt = rnd.read(16)
+    byt = int.from_bytes(byt, byteorder='little')
+    #check validity here
+    data3 = retrieveUserData(uid)
+    print(data3)
+    db.child('Conversations').child(byt).set(data2)
+    c = Conversation(data['name'], data['lastSent'])
     return c
 
 def getConvs(id):
