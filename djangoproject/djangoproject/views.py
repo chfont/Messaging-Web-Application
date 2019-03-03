@@ -41,9 +41,14 @@ def newuser(request):
             else:
                 #Valid data probably
                 try:
+                    print("t")
                     user = auth.create_user_with_email_and_password(form.cleaned_data['email'], form.cleaned_data['password'])
-                    addData(user['localId'], form.cleaned_data['username'], form.cleaned_data['email'], 0)
+                    print("u")
+                    addData(user['localId'], form.cleaned_data['username'], form.cleaned_data['email'], 'default')
                     print("Added data")
+                    request.session['uid'] = user['localId']
+                    request.session['theme'] = 'default'
+                    request.session['themeCSS'] = request.session['theme']+".css"
                 except:
                     form = NewUser()
                     return render(request, './registeruser.html', {'form': form})
@@ -61,14 +66,15 @@ def rootToLogin(request):
 def appInterface(request):
     convs = getConvs(request.session['uid'])
     convos = []
-    for c in convs:
-        convos.append(Conversation(convs[c]['name'], convs[c]['lastSent']))
+    if convs != None:
+        for c in convs:
+            convos.append(Conversation(convs[c]['name'], convs[c]['lastSent']))
     if(request.method =='POST'):
         form = NewConv(request.POST)
         sort = SortSelect(request.POST)
         if(form.is_valid()):
             encKey = SHA256.new(form.cleaned_data['key'].encode('utf-8')).hexdigest()
-            newConv = addConv(request.session['uid'], form.cleaned_data['title'], encKey)
+            newConv = addConv(request.session['uid'], form.cleaned_data['title'], encKey, form.cleaned_data['recipients'], request.session['uid'])
             convos.append(newConv)
         elif(sort.is_valid()):
             convos = sortConv(sort.cleaned_data['sortId'], convos)
