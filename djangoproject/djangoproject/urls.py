@@ -25,4 +25,5 @@ urlpatterns = [
     path('resetpassword.html', views.resetpassword, name='pReset'),
     path('appInterface.html',views.appInterface,name='main'),
     path('settings.html', views.settings, name="userSettings"),
+    path('convo.html', views.displayChat, name="conversations"),
 ]
