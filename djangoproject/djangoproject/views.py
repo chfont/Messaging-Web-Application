@@ -96,3 +96,6 @@ def settings(request):
         form = ThemeSelect()
 
     return render(request, './settings.html', {'form': form, 'themeCSS': request.session['themeCSS']})
+
+def displayChat(request):
+    return render(request, './convo.html')
