@@ -15,12 +15,13 @@
     <form action="settings.html" id="settings">
       <input type="submit" value = "Settings"></input>
     </form>
+    <form action="appInterface.html" id="return">
+        <input type="submit" value = "Back to Home Page"></input>
+    </form>
     <form action="login.html" id="logout">
       <input type="submit" value="Logout"></input>
     </form>
-    <p style = "text-align: center;">Click on one of the conversations or make a new one!</p>
   </div>
-  <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" id="newChat">Make New Chat</button>
 
 <div id="id01" class="modal">
     <form method="POST" id="newConv">
@@ -38,19 +39,9 @@
     <button type="button" onclick="document.getElementById('id01').style.display='none'" id="cancel">Cancel</button>
 </div>
 <div id = "conversations" style="height: 400px; overflow-y: scroll">
-  <b style="border: 2px solid black;">Conversations</b>
-  {% for c in convs %}
-    <div id="convTag">
-      <a href="http://localhost:8000/convo.html#convTag" style="text-decoration: none;"
-      >{{c.title}}<br />{{c.dateTimeStamp}}</a></div>
-  {% endfor %}
-</div>
-<div>
-  Sort conversations
-  <form method="POST" id="newConv">
-    {% csrf_token %}
-    {{sort.sortId}}
-  </form>
+  <b style="border: 2px solid black;">Title: {{c.title}}</b>
+  <br />
+  <b style="border:2px solid black;">Recipient:</b>
 </div>
 </body>
 </html>
