@@ -1,52 +1,39 @@
-class jsCanvas
-{
+var canvas, cntxt, flag = false,
+prevX = 0,
+prevY = 0,
+currX = 0,
+currY = 0,
+h,w;
 
-constructor()
+function init()
 {
-  flag = false;
-  currX = null;
-  currY = null;
-  prevX = null;
-  prevY = null;
-  this.canvas = document.getElementById('canvas');
-  this.contxt = canvas.getContext("2d");
-  this.h = canvas.height;
-  this.w = canvas.width;
+  canvas = document.getElementById('canvas');
+  cntxt = canvas.getContext("2d");
+  h = canvas.height;
+  w = canvas.width;
 
   canvas.addEventListener("mouseup",function(e){renderUpdate('up',e)},false);
   canvas.addEventListener("mousemove",function(e){renderUpdate('move',e)},false);
   canvas.addEventListener("mousedown",function(e){renderUpdate('down',e)},false);
 }
-
-
-renderUpdate(cmd, e)
+function renderUpdate(cmd, e)
 {
   if (cmd == 'down')
   {
     flag = true;
-    if(currX == null)
-    {
-      currX = e.clientX - canvas.offsetLeft;
-      currY = e.clientY - canvas.offsetTop;
-    }
-    else
-    {
-      prevX = currX;
-      prevY = currY;
-      currX = e.clientX - canvas.offsetLeft;
-      currY = e.clientY - canvas.offsetTop;
+    prevX = currX;
+    prevY = currY;
+    currX = e.clientX - canvas.offsetLeft;
+    currY = e.clientY - canvas.offsetTop;
 
-      contxt.beginPath();
-      contxt.fillStyle = "black";
-      contxt.fillRect(currX,currY,1,1);
-      contxt.closePath();
-    }
+      cntxt.beginPath();
+      cntxt.fillStyle = "black";
+      cntxt.fillRect(currX,currY,1,1);
+      cntxt.closePath();
   }
   else if(cmd == 'up')
   {
     flag = false;
-    currX = null;
-    currY = null;
   }
   else if(cmd == 'move')
   {
@@ -66,6 +53,4 @@ renderUpdate(cmd, e)
 
     }
   }
-}
-
 }
