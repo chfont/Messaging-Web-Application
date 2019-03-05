@@ -54,7 +54,8 @@ body
 
 #conversations
 {
-  margin: 40px 350px 10px;
+  margin: 40px 400px 20px;
+  padding: 10px;
   border: 5px solid black;
 }
 
@@ -62,4 +63,9 @@ body
 {
   border-bottom: 5px solid black;
   background-color: cornflowerblue;
+}
+
+#message
+{
+  width: 500px;
 }
