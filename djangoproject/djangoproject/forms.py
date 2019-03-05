@@ -34,3 +34,7 @@ class ThemeSelect(forms.Form):
 
 class SortSelect(forms.Form):
     sortId = forms.CharField(widget=forms.Select(choices=SORT, attrs={'onchange': 'this.form.submit();'}))
+
+class ConvEnter(forms.Form):
+    convID = forms.CharField(widget=forms.HiddenInput())
+    key = forms.CharField(widget=forms.PasswordInput, required = False)
