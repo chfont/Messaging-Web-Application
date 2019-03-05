@@ -64,23 +64,24 @@ def rootToLogin(request):
     return redirect(login)
 
 def appInterface(request):
-    convs = getConvs(request.session['uid'])
-    convos = []
-    if convs != None:
-        for c in convs:
-            convos.append(Conversation(convs[c]['name'], convs[c]['lastSent']))
+    #Need to update ConvList Here
+#    convs = getConvs(request.session['uid'],request.session['username'])
+#    convos = []
+#    if convs != None:
+#        for c in convs:
+#            convos.append(Conversation(convs[c]['name'], convs[c]['lastSent']))
     if(request.method =='POST'):
         form = NewConv(request.POST)
         sort = SortSelect(request.POST)
         if(form.is_valid()):
             encKey = SHA256.new(form.cleaned_data['key'].encode('utf-8')).hexdigest()
-            newConv = addConv(request.session['uid'], form.cleaned_data['title'], encKey, form.cleaned_data['recipients'], request.session['uid'])
-            convos.append(newConv)
+            newConv = addConv(request.session['uid'], form.cleaned_data['title'], encKey, form.cleaned_data['recipients'], request.session['username'])
         elif(sort.is_valid()):
             convos = sortConv(sort.cleaned_data['sortId'], convos)
     else:
         form = NewConv()
         sort = SortSelect()
+    convos = pollConvs(request.session['uid'], request.session['username'])
     return render(request,'./appInterface.html', {'form': form, 'sort':sort, 'convs':convos, 'themeCSS': request.session['themeCSS']})
 
 def settings(request):
