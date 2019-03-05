@@ -8,9 +8,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'mainInterface.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static themeCSS %}">
 </head>
-<body>
+<script src="{% static 'pchat.js'%}"></script>
+<body onload="init()">
   <script src="{% static 'mainInterface.js'%}"></script>
-
+  <p>{{request.session.currconv}}</p>
   <div class = "mainpane">
     <form action="settings.html" id="settings">
       <input type="submit" value = "Settings"></input>
@@ -36,5 +37,7 @@
     <input type = "submit" value="Send" />
   </p>
 </div>
+
+<canvas id="canvas" height="200" width="200" style="border:1px solid #000000;"></canvas>
 </body>
 </html>

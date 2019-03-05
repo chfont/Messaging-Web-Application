@@ -11,6 +11,7 @@ firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 
 def login(request):
+    request.session.flush()
     if (request.method == 'POST'):
         #Data has been submitted
         form = LoginForm(request.POST)
@@ -64,24 +65,33 @@ def rootToLogin(request):
     return redirect(login)
 
 def appInterface(request):
-    convs = getConvs(request.session['uid'])
-    convos = []
-    if convs != None:
-        for c in convs:
-            convos.append(Conversation(convs[c]['name'], convs[c]['lastSent']))
+    request.session['currConv'] = "INTENTIONALLY_INVALID_STRING"
+    #Need to update ConvList Here
+#    convs = getConvs(request.session['uid'],request.session['username'])
+#    convos = []
+#    if convs != None:
+#        for c in convs:
+#            convos.append(Conversation(convs[c]['name'], convs[c]['lastSent']))
     if(request.method =='POST'):
         form = NewConv(request.POST)
         sort = SortSelect(request.POST)
+        enter = ConvEnter(request.POST)
+
         if(form.is_valid()):
+            print("issue")
             encKey = SHA256.new(form.cleaned_data['key'].encode('utf-8')).hexdigest()
-            newConv = addConv(request.session['uid'], form.cleaned_data['title'], encKey, form.cleaned_data['recipients'], request.session['uid'])
-            convos.append(newConv)
+            newConv = addConv(request.session['uid'], form.cleaned_data['title'], encKey, form.cleaned_data['recipients'], request.session['username'])
         elif(sort.is_valid()):
             convos = sortConv(sort.cleaned_data['sortId'], convos)
+        elif(enter.is_valid()):
+            request.session['currconv'] = enter.cleaned_data['convID']
+            return redirect(displayChat)
     else:
         form = NewConv()
         sort = SortSelect()
-    return render(request,'./appInterface.html', {'form': form, 'sort':sort, 'convs':convos, 'themeCSS': request.session['themeCSS']})
+        enter = ConvEnter()
+    convos = pollConvs(request.session['uid'], request.session['username'])
+    return render(request,'./appInterface.html', {'form': form, 'sort':sort, 'convs': convos,'enter':enter, 'themeCSS': request.session['themeCSS']})
 
 def settings(request):
     if(request.method== 'POST'):
