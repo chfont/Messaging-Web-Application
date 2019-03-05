@@ -21,27 +21,20 @@
     <form action="login.html" id="logout">
       <input type="submit" value="Logout"></input>
     </form>
-  </div>
-
-<div id="id01" class="modal">
-    <form method="POST" id="newConv">
-      {% csrf_token %}
-      <div id = "titleField">
-        Title:
-        {{form.title}}
-      </div>
-      <div id = "titleField">
-        Password (Optional):
-        {{form.key}}
-      </div>
-      <button type="submit" class="darkbutton">Create</button>
-    </form>
-    <button type="button" onclick="document.getElementById('id01').style.display='none'" id="cancel">Cancel</button>
 </div>
 <div id = "conversations" style="height: 400px; overflow-y: scroll">
-  <b style="border: 2px solid black;">Title: {{c.title}}</b>
-  <br />
-  <b style="border:2px solid black;">Recipient:</b>
+  <div id = "chatInfo">
+    <b style="border: 2px solid black;">Title:</b>
+    <br />
+    <b style="border:2px solid black;">Recipient:</b>
+  </div>
+  <p>
+    <textarea id ="message" name="message"
+    rows="6" cols="30" placeholder="Type a message here"></textarea>
+  </p>
+  <p>
+    <input type = "submit" value="Send" />
+  </p>
 </div>
 </body>
 </html>
