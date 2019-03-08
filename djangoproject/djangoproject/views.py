@@ -72,25 +72,33 @@ def appInterface(request):
 #    if convs != None:
 #        for c in convs:
 #            convos.append(Conversation(convs[c]['name'], convs[c]['lastSent']))
+    convos = pollConvs(request.session['uid'], request.session['username'])
+    convos = sortConv('0', convos)
     if(request.method =='POST'):
         form = NewConv(request.POST)
         sort = SortSelect(request.POST)
         enter = ConvEnter(request.POST)
-
         if(form.is_valid()):
             print("issue")
             encKey = SHA256.new(form.cleaned_data['key'].encode('utf-8')).hexdigest()
             newConv = addConv(request.session['uid'], form.cleaned_data['title'], encKey, form.cleaned_data['recipients'], request.session['username'])
+            convos = pollConvs(request.session['uid'], request.session['username'])
+            convos = sortConv('0', convos)
         elif(sort.is_valid()):
             convos = sortConv(sort.cleaned_data['sortId'], convos)
         elif(enter.is_valid()):
             request.session['currconv'] = enter.cleaned_data['convID']
-            return redirect(displayChat)
+            encKey = SHA256.new(enter.cleaned_data['key'].encode('utf-8')).hexdigest();
+            if checkID(enter.cleaned_data['convID'], request.session['uid'], encKey):
+                return redirect(displayChat)
+            else:
+                form = NewConv()
+                sort = SortSelect()
+                enter = ConvEnter()
     else:
         form = NewConv()
         sort = SortSelect()
         enter = ConvEnter()
-    convos = pollConvs(request.session['uid'], request.session['username'])
     return render(request,'./appInterface.html', {'form': form, 'sort':sort, 'convs': convos,'enter':enter, 'themeCSS': request.session['themeCSS']})
 
 def settings(request):

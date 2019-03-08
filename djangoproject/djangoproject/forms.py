@@ -24,9 +24,9 @@ THEMES =[
 ]
 
 SORT =[
-    (0, "Name(A-Z)"),
-    (1, "Name(Z-A)"),
-    (2, "Recent"),
+    (0, "Recent"),
+    (1, "Name(A-Z)"),
+    (2, "Name(Z-A)"),
     (3, "Old")
 ]
 class ThemeSelect(forms.Form):

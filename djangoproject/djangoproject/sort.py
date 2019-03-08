@@ -45,11 +45,11 @@ def merge(l,r,cmp):
 
 def sortConv(id,cv):
     if id == '0':
-        cv = sort(cv, leastTitle)
-    elif id == '1':
-        cv = sort(cv, bigTitle)
-    elif id == '2':
         cv = sort(cv, recentChat)
+    elif id == '1':
+        cv = sort(cv, leastTitle)
+    elif id == '2':
+        cv = sort(cv, bigTitle)
     elif id == '3':
         cv = sort(cv, oldChat)
     return cv

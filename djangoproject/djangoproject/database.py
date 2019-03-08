@@ -62,7 +62,11 @@ def pollConvs(id, username):
                 db.child("users").child(id).child("Conversations").child(i).set(data2)
             else:
                 db.child("users").child(id).child("Conversations").child(i).update(data)
-            print("placeholder")
             c = Conversation(convList[i]['name'],convList[i]['lastSent'], convList[i]['recipients'], i)
             convs.append(c)
     return convs
+def checkID(convID, id, k):
+    print(id)
+    rK = db.child("users").child(id).child("Conversations").child(convID).child("key").get().val()
+    print(rK)
+    return rK == k
