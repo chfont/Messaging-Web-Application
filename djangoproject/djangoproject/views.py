@@ -88,7 +88,7 @@ def appInterface(request):
             convos = sortConv(sort.cleaned_data['sortId'], convos)
         elif(enter.is_valid()):
             request.session['currconv'] = enter.cleaned_data['convID']
-            encKey = SHA256.new(enter.cleaned_data['key'].encode('utf-8')).hexdigest();
+            encKey = SHA256.new(enter.cleaned_data['key'].encode('utf-8')).hexdigest()
             if checkID(enter.cleaned_data['convID'], request.session['uid'], encKey):
                 return redirect(displayChat)
             else:
