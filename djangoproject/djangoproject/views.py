@@ -79,7 +79,6 @@ def appInterface(request):
         sort = SortSelect(request.POST)
         enter = ConvEnter(request.POST)
         if(form.is_valid()):
-            print("issue")
             encKey = SHA256.new(form.cleaned_data['key'].encode('utf-8')).hexdigest()
             newConv = addConv(request.session['uid'], form.cleaned_data['title'], encKey, form.cleaned_data['recipients'], request.session['username'])
             convos = pollConvs(request.session['uid'], request.session['username'])
@@ -87,7 +86,11 @@ def appInterface(request):
         elif(sort.is_valid()):
             convos = sortConv(sort.cleaned_data['sortId'], convos)
         elif(enter.is_valid()):
-            request.session['currconv'] = enter.cleaned_data['convID']
+            request.session['currconv'] = str(enter.cleaned_data['convID'])
+            request.session['convTitle'] = getConvTitle(request.session['currconv'])
+            request.session['convRecip'] = getConvRecipients(request.session['currconv'])
+            for c in request.session['convRecip']:
+                print(c)
             encKey = SHA256.new(enter.cleaned_data['key'].encode('utf-8')).hexdigest();
             if checkID(enter.cleaned_data['convID'], request.session['uid'], encKey):
                 return redirect(displayChat)

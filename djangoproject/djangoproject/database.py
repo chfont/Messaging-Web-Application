@@ -70,3 +70,9 @@ def checkID(convID, id, k):
     rK = db.child("users").child(id).child("Conversations").child(convID).child("key").get().val()
     print(rK)
     return rK == k
+
+def getConvTitle(convid):
+    return db.child("Conversations").child(convid).child("name").get().val()
+
+def getConvRecipients(convid):
+    return db.child("Conversations").child(convid).child("recipients").get().val()
