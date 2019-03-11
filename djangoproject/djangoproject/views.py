@@ -89,9 +89,7 @@ def appInterface(request):
             request.session['currconv'] = str(enter.cleaned_data['convID'])
             request.session['convTitle'] = getConvTitle(request.session['currconv'])
             request.session['convRecip'] = getConvRecipients(request.session['currconv'])
-            for c in request.session['convRecip']:
-                print(c)
-            encKey = SHA256.new(enter.cleaned_data['key'].encode('utf-8')).hexdigest();
+            encKey = SHA256.new(enter.cleaned_data['key'].encode('utf-8')).hexdigest()
             if checkID(enter.cleaned_data['convID'], request.session['uid'], encKey):
                 return redirect(displayChat)
             else:

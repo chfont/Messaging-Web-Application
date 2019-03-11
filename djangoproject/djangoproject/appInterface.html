@@ -51,7 +51,8 @@ function f(id)
 <div id = "conversations" style="height: 400px; overflow-y: scroll">
   <b style="border: 2px solid black;">Conversations</b>
   {% for c in convs %}
-    <div id='{{c.id}}' onclick="f('{{c.id}}')">
+    <div id="chat" class="chats"
+    onclick="f('{{c.id}}')" >
       {{c.title}}<br/>{{c.dateTimeStamp}}</div>
 
   {% endfor %}
