@@ -8,8 +8,34 @@
     <link rel="stylesheet" type="text/css" href="{% static 'mainInterface.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static themeCSS %}">
 </head>
-<script src="{% static 'pchat.js'%}"></script>
-<body onload="init()">
+
+<script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+<script src="{% static 'config.js'%}"></script>
+<script>
+  // Initialize Firebase
+  var config = getConfig();
+  firebase.initializeApp(config);
+  var db = firebase.database();
+  function pushmsg()
+  {
+    var msg = document.getElementById("message").value;
+    var user = "{{request.session.username}}";
+    var t = new Date().getTime();
+    var msgKey = user+t;
+    db.ref('ConversationData/'+"{{request.session.currconv}}"+'/'+msgKey).set(
+      {
+        sender: "{{request.session.username}}",
+        timeStamp: t,
+        type: 0,
+        data: msg
+      }
+    );
+  }
+
+</script>
+
+<script>src="{% static 'config.js'%}"</script>
+<body onload='init()'>
   <script src="{% static 'mainInterface.js'%}"></script>
   <p>{{request.session.currconv}}</p>
   <div class = "mainpane">
@@ -25,16 +51,20 @@
 </div>
 <div id = "conversations" style="height: 400px; overflow-y: scroll">
   <div id = "chatInfo">
-    <b style="border: 2px solid black;">Title:</b>
+    <b style="border: 2px solid black;">Title: {{request.session.convTitle}}</b>
     <br />
-    <b style="border:2px solid black;">Recipient:</b>
+    <b style="border:2px solid black;">Recipient:
+      {% for c in request.session.convRecip %}
+        {{c}} <span> , </span>
+      {%endfor%}
+    </b>
   </div>
   <p>
     <textarea id ="message" name="message"
     rows="6" cols="30" placeholder="Type a message here"></textarea>
   </p>
   <p>
-    <input type = "submit" value="Send" />
+    <input type = "submit" value="Send" onclick="pushmsg()"/>
   </p>
 </div>
 
