@@ -2,11 +2,11 @@ from datetime import datetime
 
 class Message:
 
-    def __init__(self, s, m):
+    def __init__(self, s, m, p,t):
         self.sender = s
-        self.timeStamp = datetime.now()
+        self.timeStamp = t
         self.text = m
-
+        self.type = p
 
 class Conversation:
 

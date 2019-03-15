@@ -118,3 +118,11 @@ def settings(request):
 
 def displayChat(request):
     return render(request, './convo.html')
+
+def msgbox(request):
+    m = getMessages(request.session['currconv'])
+    messages = []
+    for n in m:
+        g = Message(m[n]['sender'], m[n]['data'], m[n]['type'], m[n]['timeStamp'])
+        messages.append(g)
+    return render(request, './msgbox.html', {'messages': messages})

@@ -10,31 +10,50 @@
 </head>
 
 <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="{% static 'config.js'%}"></script>
+<script src="{% static 'pchat.js'%}"></script>
 <script>
-  // Initialize Firebase
-  var config = getConfig();
-  firebase.initializeApp(config);
-  var db = firebase.database();
-  function pushmsg()
-  {
-    var msg = document.getElementById("message").value;
-    var user = "{{request.session.username}}";
-    var t = new Date().getTime();
-    var msgKey = user+t;
-    db.ref('ConversationData/'+"{{request.session.currconv}}"+'/'+msgKey).set(
-      {
-        sender: "{{request.session.username}}",
-        timeStamp: t,
-        type: 0,
-        data: msg
-      }
-    );
-  }
+// Initialize Firebase
+var config = getConfig();
+firebase.initializeApp(config);
+var db = firebase.database();
+function pushmsg()
+{
+  var msg = document.getElementById("message").value;
+  document.getElementById("message").value = "";
+  var user = "{{request.session.username}}";
+  var t = new Date().getTime();
+  var msgKey = user+t;
+  db.ref('ConversationData/'+"{{request.session.currconv}}"+'/'+msgKey).set(
+    {
+      sender: "{{request.session.username}}",
+      timeStamp: t,
+      type: 0,
+      data: msg
+    }
+  );
+}
+var msgarea = document.getElementById('chatbox');
 
+function renderMSG(data)
+{
+  var $resDiv = $("")
+  newdiv = document.createElement('div');
+  newdiv.id = data.sender;
+  alert("");
+  msgarea.appendChild(newdiv);
+  alert(data.data);
+}
+var convRef = db.ref('ConversationData/'+"{{request.session.currconv}}"+'/');
+convRef.on('value', function(snapshot){
+  //var convData =snapshot.val();
+  //var keyArr= Object.keys(snapshot.val());
+  //keyArr.forEach(function(k){renderMSG(convData[k]));
+  $('.chatbox').html('').load('{% url "msgbox" %}');
+});
 </script>
 
-<script>src="{% static 'config.js'%}"</script>
 <body onload='init()'>
   <script src="{% static 'mainInterface.js'%}"></script>
   <p>{{request.session.currconv}}</p>
@@ -58,6 +77,9 @@
         {{c}} <span> , </span>
       {%endfor%}
     </b>
+  </div>
+  <div class="chatbox">
+    {% include 'msgbox.html' %}
   </div>
   <p>
     <textarea id ="message" name="message"

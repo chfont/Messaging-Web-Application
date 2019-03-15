@@ -66,9 +66,7 @@ def pollConvs(id, username):
             convs.append(c)
     return convs
 def checkID(convID, id, k):
-    print(id)
     rK = db.child("users").child(id).child("Conversations").child(convID).child("key").get().val()
-    print(rK)
     return rK == k
 
 def getConvTitle(convid):
@@ -76,3 +74,5 @@ def getConvTitle(convid):
 
 def getConvRecipients(convid):
     return db.child("Conversations").child(convid).child("recipients").get().val()
+def getMessages(convid):
+    return db.child("ConversationData").child(convid).get().val()
