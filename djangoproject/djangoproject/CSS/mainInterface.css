@@ -72,3 +72,11 @@
   transition: all 0.4s ease-in;
   border: 5px solid black;
 }
+
+.chats:hover
+{
+  transform: scale(1.05,1.05);
+  color: greenyellow;
+  background-color: #3832ad;
+}
+
