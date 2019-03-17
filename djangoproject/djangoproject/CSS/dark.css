@@ -3,3 +3,12 @@ body
 background-color: #343148;
 color: white;
 }
+
+#meMSG
+{
+  background-color: #5d5881;
+}
+#otherMSG
+{
+  background-color: #755881;
+}

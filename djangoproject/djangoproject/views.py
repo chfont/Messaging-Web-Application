@@ -125,4 +125,5 @@ def msgbox(request):
     for n in m:
         g = Message(m[n]['sender'], m[n]['data'], m[n]['type'], m[n]['timeStamp'])
         messages.append(g)
+    messages = sortMSGByTime(messages)
     return render(request, './msgbox.html', {'messages': messages})

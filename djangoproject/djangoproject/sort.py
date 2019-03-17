@@ -53,3 +53,7 @@ def sortConv(id,cv):
     elif id == '3':
         cv = sort(cv, oldChat)
     return cv
+
+def sortMSGByTime(m):
+    m =sort(m, oldChat)
+    return m

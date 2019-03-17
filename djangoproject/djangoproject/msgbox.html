@@ -1,5 +1,10 @@
+
+
 {% for i in messages%}
 
-<div>{{i.text}}</div>
-
+{%if i.sender == request.session.username %}
+<div id = "meMSG">{{i.text}}</div>
+{%else%}
+<div id = "otherMSG">{{i.text}}</div>
+{%endif%}
 {%endfor%}
