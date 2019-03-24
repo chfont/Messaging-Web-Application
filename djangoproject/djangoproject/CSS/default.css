@@ -11,3 +11,45 @@ body
 
 a{color: white;}
 a:visited{color: white;}
+
+#meMSG
+{
+  background-color:#4f5d81;
+}
+#otherMSG
+{
+  background-color: #2a3962;
+  /*#51484F*/
+}
+
+button
+{
+  color: white;
+  background-color:  #86a8c6;
+  border-style: none;
+  padding: 5px 5px 5px 5px;
+}
+
+#formbutton
+{
+  color: white;
+  background-color:  #86a8c6;
+  border-style: none;
+  padding: 5px 5px 5px 5px;
+}
+
+textarea
+{
+  color:white;
+  background-color:  #86a8c6;
+  border-style: none;
+}
+
+#forminput
+{
+  color:white;
+  background-color: #86a8c6;
+  border-style: none;
+  margin: 5px 0px 5px 0px;
+  padding: 5px 0 px 5px 0px;
+}

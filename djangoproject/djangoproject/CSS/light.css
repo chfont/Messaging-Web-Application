@@ -3,3 +3,44 @@ body
  background-color: #EAE6DA;
  color: black;
 }
+
+#meMSG
+{
+  background-color: #e6ddc3;
+}
+#otherMSG
+{
+  background-color: #a19269;
+}
+
+button
+{
+   background-color: #a59b7f;
+   color: black;
+   border-style: none;
+   padding: 5px 5px 5px 5px;
+}
+
+#formbutton
+{
+  color: black;
+  background-color:  #a59b7f;
+  border-style: none;
+  padding: 5px 5px 5px 5px;
+}
+
+textarea
+{
+  color:black;
+  background-color: #a59b7f;
+  border-style: none;
+}
+
+#forminput
+{
+  color:black;
+  background-color: #a59b7f;
+  border-style: none;
+  margin: 5px 0px 5px 0px;
+  padding: 5px 0 px 5px 0px;
+}

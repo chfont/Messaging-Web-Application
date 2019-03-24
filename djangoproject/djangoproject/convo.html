@@ -35,17 +35,21 @@ function pushmsg()
     }
   );
 }
+
+function pushCanv()
+{
+  var canvData = submitCanvas();
+  alert(canvData);
+  var user = "{{request.session.username}}";
+  var t = new Date().getTime();
+  var msgKey = user+t;
+  db.ref('ConversationData/'+"{{request.session.currconv}}"+'/'+msgKey).set({sender: user, timeStamp: t, type: 0, data: canvData});
+}
+function showCanvas(){document.getElementById('canvasDiv').style.display="block";}
+function hideCanvas(){document.getElementById('canvasDiv').style.display="none"; clearCanv();}
 var msgarea = document.getElementById('chatbox');
 
-function renderMSG(data)
-{
-  var $resDiv = $("")
-  newdiv = document.createElement('div');
-  newdiv.id = data.sender;
-  alert("");
-  msgarea.appendChild(newdiv);
-  alert(data.data);
-}
+
 var convRef = db.ref('ConversationData/'+"{{request.session.currconv}}"+'/');
 convRef.on('value', function(snapshot){
   //var convData =snapshot.val();
@@ -59,13 +63,13 @@ convRef.on('value', function(snapshot){
   <script src="{% static 'mainInterface.js'%}"></script>
   <div class = "mainpane">
     <form action="settings.html" id="settings">
-      <input type="submit" value = "Settings"></input>
+      <input type="submit" value = "Settings" id = "formbutton"></input>
     </form>
     <form action="appInterface.html" id="return">
-        <input type="submit" value = "Back to Home Page"></input>
+        <input type="submit" value = "Back to Home Page" id="formbutton"></input>
     </form>
     <form action="login.html" id="logout">
-      <input type="submit" value="Logout"></input>
+      <input type="submit" value="Logout" id="formbutton"></input>
     </form>
 </div>
 <div id = "conversations" style="height: 400px; overflow-y: scroll">
@@ -83,17 +87,24 @@ convRef.on('value', function(snapshot){
   </div>
 
 </div>
-
+<button id="showCanvas" onclick="showCanvas()">+</button>
 <div id="typemsg" style="text-align:center;">
 <p>
   <textarea id ="message" name="message"
   rows="6" cols="30" placeholder="Type a message here"></textarea>
 </p>
 <p>
-  <input type = "submit" value="Send" onclick="pushmsg()"/>
+  <input type = "submit" value="Send"  id="formbutton" onclick="pushmsg()"/>
 </p>
 </div>
 
-<canvas id="canvas" height="200" width="200" style="border:1px solid #000000; background-color: white;"></canvas>
+
+
+<div id="canvasDiv" style="display:none">
+<canvas id="canvas" height="20" width="20" style="border:1px solid #000000; background-color: white;"></canvas>
+<button id="hideCanvas" onclick="hideCanvas()">X</button>
+
+<button id="submitCanvas">Send</button>
+</div>
 </body>
 </html>
