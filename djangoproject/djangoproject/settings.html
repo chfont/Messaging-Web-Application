@@ -12,7 +12,7 @@
 <body>
 <div>
   <form action="appInterface.html" id="backhome">
-    <input type="submit" value="Back To Home">
+    <input type="submit" value="Back To Home" id="formbutton">
   </input>
   </form>
 </div>
@@ -20,7 +20,6 @@
         <form method = "post">
           {%csrf_token%}
           {{form.id}}
-          <button type="submit">Save Theme</button>
         </form>
       </div>
 <form id = "setusername">

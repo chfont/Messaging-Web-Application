@@ -22,10 +22,10 @@ function f(id)
 
   <div class = "mainpane">
     <form action="settings.html" id="settings">
-      <input type="submit" value = "Settings"></input>
+      <input type="submit" value = "Settings" id="formbutton"></input>
     </form>
     <form action="login.html" id="logout">
-      <input type="submit" value="Logout"></input>
+      <input type="submit" value="Logout" id="formbutton"></input>
     </form>
     <p style = "text-align: center;">Click on one of the conversations or make a new one!</p>
   </div>
@@ -59,7 +59,8 @@ function f(id)
   {% endfor %}
 </div>
 
-<div id = "key">
+
+<div id = "key" style="display:none;">
   <form method="POST" id="enterConv">
     {%csrf_token%}
     <div>

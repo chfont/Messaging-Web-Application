@@ -11,4 +11,37 @@ color: white;
 #otherMSG
 {
   background-color: #755881;
+  /*#51484F*/
+}
+
+button
+{
+  color: white;
+  background-color:  #585379;
+  border-style: none;
+  padding: 5px 5px 5px 5px;
+}
+
+#formbutton
+{
+  color: white;
+  background-color:  #585379;
+  border-style: none;
+  padding: 5px 5px 5px 5px;
+}
+
+textarea
+{
+  color:white;
+  background-color:  #585379;
+  border-style: none;
+}
+
+#forminput
+{
+  color:white;
+  background-color: #585379;
+  border-style: none;
+  margin: 5px 0px 5px 0px;
+  padding: 5px 0 px 5px 0px;
 }

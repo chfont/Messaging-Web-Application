@@ -11,9 +11,9 @@ class NewUser(forms.Form):
     confirmPassword = forms.CharField(label="Confirm Password", max_length=512, widget=forms.PasswordInput)
 
 class NewConv(forms.Form):
-    title= forms.CharField(label="Title", max_length=64)
-    key=forms.CharField(label="Key", max_length=64, required= False,widget=forms.PasswordInput)
-    recipients=forms.CharField(label="Recipients")
+    title= forms.CharField(label="Title", max_length=64, widget=forms.TextInput(attrs={'id':'forminput'}))
+    key=forms.CharField(label="Key", max_length=64, required= False,widget=forms.PasswordInput(attrs={'id':'forminput'}))
+    recipients=forms.CharField(label="Recipients", widget=forms.TextInput(attrs={'id':'forminput'}))
 
 
 
@@ -30,11 +30,11 @@ SORT =[
     (3, "Old")
 ]
 class ThemeSelect(forms.Form):
-    id = forms.CharField(label="Select Theme:", widget=forms.Select(choices=THEMES))
+    id = forms.CharField(label="Select Theme:", widget=forms.Select(choices=THEMES, attrs={'onchange': 'this.form.submit()', 'id':'formbutton'}))
 
 class SortSelect(forms.Form):
-    sortId = forms.CharField(widget=forms.Select(choices=SORT, attrs={'onchange': 'this.form.submit();'}))
+    sortId = forms.CharField(widget=forms.Select(choices=SORT, attrs={'onchange': 'this.form.submit();', 'id':'formbutton'}))
 
 class ConvEnter(forms.Form):
     convID = forms.CharField(widget=forms.HiddenInput())
-    key = forms.CharField(widget=forms.PasswordInput, required = False)
+    key = forms.CharField(widget=forms.PasswordInput(attrs={'id': 'forminput'}), required = False)
