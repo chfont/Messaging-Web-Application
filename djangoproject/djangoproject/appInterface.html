@@ -14,7 +14,7 @@
 function f(id)
 {
   document.getElementById('{{enter.convID.auto_id}}').value = id;
-  document.getElementById("key").style.display='block';
+  document.getElementById('key').style.display = 'block';
 }
 </script>
 <body>
@@ -54,12 +54,10 @@ function f(id)
   <b style="border: 2px solid black;">Conversations</b>
   {% for c in convs %}
     <div id="chat" class="chats"
-    onclick="f('{{c.id}}')" >
+    onclick="f('{{c.id}}')">
       {{c.title}}<br/>{{c.dateTimeStamp}}</div>
-
   {% endfor %}
 </div>
-
 
 <div id = "key">
   <form method="POST" id="enterConv">
@@ -72,8 +70,8 @@ function f(id)
     </div>
     <button type="submit">Enter</button>
   </form>
+  <button type="button" onclick="document.getElementById('key').style.display='none'" id="cancel">Cancel</button>
 </div>
-
 
 <div>
   Sort conversations
