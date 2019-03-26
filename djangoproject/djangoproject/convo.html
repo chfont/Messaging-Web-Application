@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'mainInterface.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'convo.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'msgbox.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static request.session.themeCSS %}">
 </head>
@@ -43,7 +43,7 @@ function pushCanv()
   var user = "{{request.session.username}}";
   var t = new Date().getTime();
   var msgKey = user+t;
-  db.ref('ConversationData/'+"{{request.session.currconv}}"+'/'+msgKey).set({sender: user, timeStamp: t, type: 0, data: canvData});
+  db.ref('ConversationData/'+"{{request.session.currconv}}"+'/'+msgKey).set({sender: user, timeStamp: t, type: 1, data: canvData});
 }
 function showCanvas(){document.getElementById('canvasDiv').style.display="block";}
 function hideCanvas(){document.getElementById('canvasDiv').style.display="none"; clearCanv();}
@@ -62,17 +62,15 @@ convRef.on('value', function(snapshot){
 <body onload='init()'>
   <script src="{% static 'mainInterface.js'%}"></script>
   <div class = "mainpane">
-    <form action="settings.html" id="settings">
-      <input type="submit" value = "Settings" id = "formbutton"></input>
+    <form action="login.html" id="logout">
+      <input type="submit" value="Logout" id="formbutton"></input>
     </form>
     <form action="appInterface.html" id="return">
         <input type="submit" value = "Back to Home Page" id="formbutton"></input>
     </form>
-    <form action="login.html" id="logout">
-      <input type="submit" value="Logout" id="formbutton"></input>
-    </form>
+
 </div>
-<div id = "conversations" style="height: 400px; overflow-y: scroll">
+<div id = "conversations" style="overflow-y: scroll">
   <div id = "chatInfo">
     <b style="border: 2px solid black;">Title: {{request.session.convTitle}}</b>
     <br />
@@ -101,10 +99,10 @@ convRef.on('value', function(snapshot){
 
 
 <div id="canvasDiv" style="display:none">
-<canvas id="canvas" height="20" width="20" style="border:1px solid #000000; background-color: white;"></canvas>
+<canvas id="canvas" height="100" width="100" style="border:1px solid #000000; background-color: white;"></canvas>
 <button id="hideCanvas" onclick="hideCanvas()">X</button>
 
-<button id="submitCanvas">Send</button>
+<button id="submitCanvas" onclick="pushCanv()">Send</button>
 </div>
 </body>
 </html>

@@ -68,23 +68,30 @@ function clearCanv()
 /*Not working*/
 function submitCanvas()
 {
-  var rawData = cntxt.getImageData(0,0,canvas.width, canvas.height);
-  var dec = "";
+  var rD = cntxt.getImageData(0,0, canvas.width, canvas.height);
+  var binS = "";
+  var hexS = "";
   var count = 0;
-  var hexString = "";
-  for(var i = 3; i < rawData.data.length; i+=4)
+  var digit;
+  for(var i = 3; i < rD.data.length; i+=4)
   {
-    if(rawData.data[i] != 0)
-    {dec+= "1";}
-    else{dec+="0";}
-    if(count % 3 == 0 && count != 0)
+    count += 1;
+    var d = rD.data[i];
+    if(d > 0)
     {
-      count = 0;
-      dec = parseInt(dec,2);
-      dec = dec.toString(16);
-      hexString += dec;
+      binS += "1";
     }
-    count++;
+    else
+    {
+      binS += "0";
+    }
+
+    if(count % 4 == 0)
+    {
+      digit = parseInt(binS, 2);
+      hexS += digit.toString(16);
+      binS = "";
+    }
   }
-  return hexString;
+  return hexS;
 }

@@ -15,21 +15,28 @@ function f(id)
 {
   document.getElementById('{{enter.convID.auto_id}}').value = id;
   document.getElementById('key').style.display = 'block';
+  document.getElementById('id01').style.display = 'none';
+}
+function newChat()
+{
+  document.getElementById('key').style.display='none';
+  document.getElementById('id01').style.display='block';
 }
 </script>
 <body>
   <script src="{% static 'mainInterface.js'%}"></script>
 
   <div class = "mainpane">
-    <form action="settings.html" id="settings">
-      <input type="submit" value = "Settings" id="formbutton"></input>
-    </form>
-    <form action="login.html" id="logout">
+
+    <form action="login.html" id="logout" style="float:right; margin: 0px 0px 0px 5px;">
       <input type="submit" value="Logout" id="formbutton"></input>
+    </form>
+    <form action="settings.html" id="settings" style="float: right; margin: 0px 0px 0px 5px;">
+      <input type="submit" value = "Settings" id="formbutton"></input>
     </form>
     <p style = "text-align: center;">Click on one of the conversations or make a new one!</p>
   </div>
-  <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" id="newChat">Make New Chat</button>
+  <div id="newChat"><button onclick="newChat()">Make New Chat</button></div>
 
 <div id="id01" class="modal">
     <form method="POST" id="newConv">
@@ -48,9 +55,9 @@ function f(id)
       </div>
       <button type="submit" class="darkbutton">Create</button>
     </form>
-    <button type="button" onclick="document.getElementById('id01').style.display='none'" id="cancel">Cancel</button>
+    <button type="button" onclick="document.getElementById('id01').style.display='none';" id="cancel">Cancel</button>
 </div>
-<div id = "conversations" style="height: 400px; overflow-y: scroll">
+<div id = "conversations" style="overflow-y: scroll; ">
   <b style="border: 2px solid black;">Conversations</b>
   {% for c in convs %}
     <div id="chat" class="chats"
@@ -60,21 +67,24 @@ function f(id)
 </div>
 
 
-<div id = "key" style="display:none;">
+<div id = "key"style="display:none;">
   <form method="POST" id="enterConv">
     {%csrf_token%}
     <div>
       {{enter.convID}}
     </div>
+    Password (leave blank if N/A):
     <div>
       {{enter.key}}
     </div>
-    <button type="submit">Enter</button>
+    <button type="submit" style="float: left; margin: 5px 5px 5px 0px;">Enter</button>
   </form>
-  <button type="button" onclick="document.getElementById('key').style.display='none'" id="cancel">Cancel</button>
+  <button type="button" onclick="document.getElementById('key').style.display='none'" style="margin:5px;" id="cancel">Cancel</button>
 </div>
 
-<div>
+<div id="sort" style="  position: absolute;
+  width: 10%;
+  left:25%;">
   Sort conversations
   <form method="POST" id="newConv">
     {% csrf_token %}

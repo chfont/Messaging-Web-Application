@@ -1,10 +1,39 @@
+<head>
+<script type="text/javascript">
+function renderCanv( rData, id)
+{
+  var canv = document.getElementById(id);
+  var cn = canv.getContext("2d");
+  var d = cn.createImageData(100,100);
+  for(var i = 0; i < rData.length; i++)
+  {
+    d.data[i] = rData[i];
+  }
+  cn.putImageData(d,0,0);
 
+}
 
+function test(id)
+{
+  var canv = document.getElementById(id);
+}
+</script>
+</head>
 {% for i in messages%}
 
 {%if i.sender == request.session.username %}
-<div id = "meMSG">{{i.text}}</div>
+  {%if i.type == 1 %}
+  <div id="meMSG"><canvas width=100px; height=100px; id="{{i.timeStamp}}" style="background-color: white; border: 1px solid black;"></canvas></div>
+  <script>renderCanv({{i.imgData}}, "{{i.timeStamp}}");</script>
+  {% else %}
+  <div id = "meMSG">{{i.text}}</div>
+  {%endif%}
 {%else%}
-<div id = "otherMSG">{{i.text}}</div>
+    {%if i.type == 1 %}
+    <div id="otherMSG"><canvas width = 100px; height = 100px; id="{{i.timeStamp}}" style="background-color: white; border: 1px solid black;"></canvas></div>
+    <script>renderCanv({{i.imgData}}, "{{i.timeStamp}}");</script>
+    {%else%}
+    <div id = "otherMSG">{{i.text}}</div>
+    {%endif%}
 {%endif%}
 {%endfor%}

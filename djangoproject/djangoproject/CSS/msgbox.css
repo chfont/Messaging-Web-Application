@@ -7,3 +7,13 @@
 {
   text-align: left;
 }
+
+canvas.meMSG
+{
+  float: right;
+}
+
+canvas.otherMSG
+{
+  float: left;
+}

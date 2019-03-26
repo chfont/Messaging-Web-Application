@@ -1,0 +1,33 @@
+#conversations
+{
+  position: absolute;
+  width: 50%;
+  left: 25%;
+  top:10%;
+  height: 40%;
+  border: 5px solid black;
+}
+
+#message
+{
+  width: auto;
+}
+
+#typemsg
+{
+  position: absolute;
+  width: 50%;
+  left: 25%;
+  top: 55%;
+}
+
+#logout
+{
+  float: right;
+  margin-left: 5px;
+}
+
+#return
+{
+  float:right;
+}

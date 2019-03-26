@@ -123,7 +123,10 @@ def msgbox(request):
     m = getMessages(request.session['currconv'])
     messages = []
     for n in m:
-        g = Message(m[n]['sender'], m[n]['data'], m[n]['type'], m[n]['timeStamp'])
+        if m[n]['type'] == 1:
+            g = Picto(m[n]['sender'], m[n]['data'],m[n]['type'], m[n]['timeStamp'])
+        else:
+            g = Message(m[n]['sender'], m[n]['data'], m[n]['type'], m[n]['timeStamp'])
         messages.append(g)
     messages = sortMSGByTime(messages)
     return render(request, './msgbox.html', {'messages': messages})
