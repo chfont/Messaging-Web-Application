@@ -65,6 +65,23 @@ function clearCanv()
   cntxt.clearRect(0,0, canvas.width, canvas.height);
 }
 
+function b64(digit)
+{
+  var charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+-";
+  var s="";
+  do
+  {
+    s+= charset[digit % 64];
+    digit = Math.floor(digit/64);
+  }while(digit !=0);
+  if (s == "")
+  {
+    s = "0";
+  }
+  return s.split("").reverse().join("");
+
+}
+
 /*Not working*/
 function submitCanvas()
 {
@@ -86,10 +103,10 @@ function submitCanvas()
       binS += "0";
     }
 
-    if(count % 4 == 0)
+    if(count % 6 == 0)
     {
       digit = parseInt(binS, 2);
-      hexS += digit.toString(16);
+      hexS += b64(digit);
       binS = "";
     }
   }

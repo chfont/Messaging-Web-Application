@@ -2,14 +2,23 @@ from datetime import datetime, timezone
 
 
 def bHex(hexs):
-    dec = int(hexs, 16)
+    dec = int(hexs, 64)
     b = bin(dec)
     b = b[2:]
-    if len(b) != 4:
-        for i in range(4-len(b)):
+    if len(b) != 6:
+        for i in range(6-len(b)):
             b = "0"+b
     return b
 
+def B64(s):
+    charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+-"
+    decDigi = charset.find(s)
+    b = bin(decDigi)
+    b = b[2:]
+    if len(b) != 6:
+        for i in range(6-len(b)):
+            b= "0"+b
+    return b
 
 class Message:
 
@@ -42,7 +51,7 @@ class Picto:
     def convertData(self):
         arr = []
         for i in self.raw:
-            j = bHex(i)
+            j = B64(i)
             for n in j:
                 print(n)
                 arr.append(0)

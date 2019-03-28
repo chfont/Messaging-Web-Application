@@ -4,7 +4,7 @@ function renderCanv( rData, id)
 {
   var canv = document.getElementById(id);
   var cn = canv.getContext("2d");
-  var d = cn.createImageData(100,100);
+  var d = cn.createImageData(210,60);
   for(var i = 0; i < rData.length; i++)
   {
     d.data[i] = rData[i];
@@ -23,14 +23,14 @@ function test(id)
 
 {%if i.sender == request.session.username %}
   {%if i.type == 1 %}
-  <div id="meMSG"><canvas width=100px; height=100px; id="{{i.timeStamp}}" style="background-color: white; border: 1px solid black;"></canvas></div>
+  <div id="meMSG"><canvas width=210px; height=60px; id="{{i.timeStamp}}" style="background-color: white; border: 1px solid black;"></canvas></div>
   <script>renderCanv({{i.imgData}}, "{{i.timeStamp}}");</script>
   {% else %}
   <div id = "meMSG">{{i.text}}</div>
   {%endif%}
 {%else%}
     {%if i.type == 1 %}
-    <div id="otherMSG"><canvas width = 100px; height = 100px; id="{{i.timeStamp}}" style="background-color: white; border: 1px solid black;"></canvas></div>
+    <div id="otherMSG"><canvas width = 210px; height = 60px; id="{{i.timeStamp}}" style="background-color: white; border: 1px solid black;"></canvas></div>
     <script>renderCanv({{i.imgData}}, "{{i.timeStamp}}");</script>
     {%else%}
     <div id = "otherMSG">{{i.text}}</div>

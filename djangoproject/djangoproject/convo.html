@@ -34,16 +34,25 @@ function pushmsg()
       data: msg
     }
   );
+  updateData =
+  {
+    lastSent: t/1000
+  };
+  db.ref('Conversations/'+"{{request.session.currconv}}").update(updateData);
 }
 
 function pushCanv()
 {
   var canvData = submitCanvas();
-  alert(canvData);
   var user = "{{request.session.username}}";
   var t = new Date().getTime();
   var msgKey = user+t;
   db.ref('ConversationData/'+"{{request.session.currconv}}"+'/'+msgKey).set({sender: user, timeStamp: t, type: 1, data: canvData});
+  updateData =
+  {
+    lastSent: t/1000
+  };
+  db.ref('Conversations/'+"{{request.session.currconv}}").update(updateData);
 }
 function showCanvas(){document.getElementById('canvasDiv').style.display="block";}
 function hideCanvas(){document.getElementById('canvasDiv').style.display="none"; clearCanv();}
@@ -99,7 +108,7 @@ convRef.on('value', function(snapshot){
 
 
 <div id="canvasDiv" style="display:none">
-<canvas id="canvas" height="100" width="100" style="border:1px solid #000000; background-color: white;"></canvas>
+<canvas id="canvas" height="60" width="210" style="border:1px solid #000000; background-color: white;"></canvas>
 <button id="hideCanvas" onclick="hideCanvas()">X</button>
 
 <button id="submitCanvas" onclick="pushCanv()">Send</button>
