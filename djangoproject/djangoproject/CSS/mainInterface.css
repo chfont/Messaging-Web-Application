@@ -39,18 +39,17 @@
 {
 position: absolute;
 width:10%;
-top:5%;
+top:7.5%;
 left:45%;
 }
 
 
-/* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
+  display: none;
   position: absolute;
   width: 20%;
   left:40%;
-  top: 55%;
+  top: 60%;
 }
 
 #conversations
@@ -58,7 +57,7 @@ left:45%;
   position:absolute;
   width: 50%;
   left: 25%;
-  top: 10%;
+  top: 15%;
   height: 40%;
   border: 5px solid black;
 }
@@ -84,7 +83,7 @@ left:45%;
 
 .chats:hover
 {
-  transform: scale(1.05,1.05);
+  transform: scale(1.0,1.0);
   color: greenyellow;
   background-color: #3832ad;
 }
@@ -94,7 +93,7 @@ left:45%;
   position: absolute;
   width:10%;
   left: 45%;
-  top: 55%;
+  top: 60%;
   margin: 0 auto;
   width: 30%;
 }
@@ -104,5 +103,5 @@ left:45%;
   position: absolute;
   width: 10%;
   left:25%;
-  top: 55%;
+  top: 60%;
 }
