@@ -10,9 +10,13 @@ firebase = pyrebase.initialize_app(config)
 
 auth = firebase.auth()
 
+def checkLogged(request):
+    if 'uid' in request.session:
+        return True
+    return False
+
 def login(request):
     request.session.flush()
-    request.session['logged'] = False
     if (request.method == 'POST'):
         #Data has been submitted
         form = LoginForm(request.POST)
@@ -67,7 +71,7 @@ def rootToLogin(request):
     return redirect(login)
 
 def appInterface(request):
-    if request.session['logged'] == False:
+    if(checkLogged(request) == False):
         return redirect(login)
     request.session['currConv'] = "INTENTIONALLY_INVALID_STRING"
     #Need to update ConvList Here
@@ -107,7 +111,7 @@ def appInterface(request):
     return render(request,'./appInterface.html', {'form': form, 'sort':sort, 'convs': convos,'enter':enter, 'themeCSS': request.session['themeCSS']})
 
 def settings(request):
-    if request.session['logged'] == False:
+    if(checkLogged(request) == False):
         return redirect(login)
     if(request.method== 'POST'):
         form = ThemeSelect(request.POST)
@@ -123,7 +127,7 @@ def settings(request):
     return render(request, './settings.html', {'form': form, 'themeCSS': request.session['themeCSS']})
 
 def displayChat(request):
-    if request.session['logged'] == False:
+    if(checkLogged(request) == False):
         return redirect(login)
     return render(request, './convo.html')
 
