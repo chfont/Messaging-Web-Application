@@ -28,6 +28,7 @@ function test(id)
   {% else %}
   <div id = "meMSG">{{i.text}}</div>
   {%endif%}
+  <div id="meMSG" style="font-size: 11px">-{{i.sender}}</div>
 {%else%}
     {%if i.type == 1 %}
     <div id="otherMSG"><canvas width = 210px; height = 60px; id="{{i.timeStamp}}" style="background-color: white; border: 1px solid black;"></canvas></div>
@@ -35,5 +36,6 @@ function test(id)
     {%else%}
     <div id = "otherMSG">{{i.text}}</div>
     {%endif%}
+    <div id="otherMSG" style="font-size: 11px">-{{i.sender}}</div>
 {%endif%}
 {%endfor%}

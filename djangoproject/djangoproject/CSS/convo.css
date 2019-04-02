@@ -31,3 +31,11 @@
 {
   float:right;
 }
+
+#chatInfo
+{
+  position: absolute;
+  width: 50%;
+  left:25%;
+  top: 5%;
+}

@@ -58,12 +58,14 @@ function showCanvas(){document.getElementById('canvasDiv').style.display="block"
 function hideCanvas(){document.getElementById('canvasDiv').style.display="none"; clearCanv();}
 var msgarea = document.getElementById('chatbox');
 
+function scroll(){$('#conversations').scrollTop($('#conversations')[0].scrollHeight);}
 
 var convRef = db.ref('ConversationData/'+"{{request.session.currconv}}"+'/');
 convRef.on('value', function(snapshot){
   //var convData =snapshot.val();
   //var keyArr= Object.keys(snapshot.val());
   //keyArr.forEach(function(k){renderMSG(convData[k]));
+  scroll();
   $('.chatbox').html('').load('{% url "msgbox" %}');
 });
 </script>
@@ -79,20 +81,19 @@ convRef.on('value', function(snapshot){
     </form>
 
 </div>
+<div id = "chatInfo" style="position: absolute; width: 50%; left: 25%; top:1%;">
+  <b style="border: 2px solid black;">Title: {{request.session.convTitle}}</b>
+  <br />
+  <b style="border:2px solid black;">Recipient:
+    {% for c in request.session.convRecip %}
+      {{c}} <span> , </span>
+    {%endfor%}
+  </b>
+</div>
 <div id = "conversations" style="overflow-y: scroll">
-  <div id = "chatInfo">
-    <b style="border: 2px solid black;">Title: {{request.session.convTitle}}</b>
-    <br />
-    <b style="border:2px solid black;">Recipient:
-      {% for c in request.session.convRecip %}
-        {{c}} <span> , </span>
-      {%endfor%}
-    </b>
-  </div>
   <div class="chatbox">
     {% include 'msgbox.html' %}
   </div>
-
 </div>
 <button id="showCanvas" onclick="showCanvas()">+</button>
 <div id="typemsg" style="text-align:center;">
