@@ -53,7 +53,6 @@ class Picto:
         for i in self.raw:
             j = B64(i)
             for n in j:
-                print(n)
                 arr.append(0)
                 arr.append(0)
                 arr.append(0)

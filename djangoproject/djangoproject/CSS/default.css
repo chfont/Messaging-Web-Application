@@ -53,3 +53,19 @@ textarea
   margin: 5px 0px 5px 0px;
   padding: 5px 0 px 5px 0px;
 }
+
+.chats:hover
+{
+  transform: scale(1.0,1.0);
+  color: white;
+  background-color:  #86a8c6;
+}
+
+#key
+{
+    background-color: #4f82af;
+}
+#id01
+{
+    background-color: #4f82af;
+}

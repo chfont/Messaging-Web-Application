@@ -22,37 +22,46 @@ var db = firebase.database();
 function pushmsg()
 {
   var msg = document.getElementById("message").value;
-  document.getElementById("message").value = "";
-  var user = "{{request.session.username}}";
-  var t = new Date().getTime();
-  var msgKey = user+t;
-  db.ref('ConversationData/'+"{{request.session.currconv}}"+'/'+msgKey).set(
-    {
-      sender: "{{request.session.username}}",
-      timeStamp: t,
-      type: 0,
-      data: msg
-    }
-  );
-  updateData =
+  if(msg != "")
   {
-    lastSent: t/1000
-  };
-  db.ref('Conversations/'+"{{request.session.currconv}}").update(updateData);
+    document.getElementById("message").value = "";
+    var user = "{{request.session.username}}";
+    var t = new Date().getTime();
+    var msgKey = user+t;
+    db.ref('ConversationData/'+"{{request.session.currconv}}"+'/'+msgKey).set(
+      {
+        sender: "{{request.session.username}}",
+        timeStamp: t,
+        type: 0,
+        data: msg
+      }
+    );
+    updateData =
+    {
+      lastSent: t/1000
+    };
+    db.ref('Conversations/'+"{{request.session.currconv}}").update(updateData);
+  }
 }
 
 function pushCanv()
 {
+  var emptyCanvasData = "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
   var canvData = submitCanvas();
-  var user = "{{request.session.username}}";
-  var t = new Date().getTime();
-  var msgKey = user+t;
-  db.ref('ConversationData/'+"{{request.session.currconv}}"+'/'+msgKey).set({sender: user, timeStamp: t, type: 1, data: canvData});
-  updateData =
+  if (canvData != emptyCanvasData)
   {
-    lastSent: t/1000
-  };
-  db.ref('Conversations/'+"{{request.session.currconv}}").update(updateData);
+    var user = "{{request.session.username}}";
+    var t = new Date().getTime();
+    var msgKey = user+t;
+    db.ref('ConversationData/'+"{{request.session.currconv}}"+'/'+msgKey).set({sender: user, timeStamp: t, type: 1, data: canvData});
+    updateData =
+    {
+      lastSent: t/1000
+    };
+    db.ref('Conversations/'+"{{request.session.currconv}}").update(updateData);
+    clearCanv();
+  }
+
 }
 function showCanvas(){document.getElementById('canvasDiv').style.display="block";}
 function hideCanvas(){document.getElementById('canvasDiv').style.display="none"; clearCanv();}
@@ -60,6 +69,7 @@ var msgarea = document.getElementById('chatbox');
 
 function scroll(){$('#conversations').scrollTop($('#conversations')[0].scrollHeight);}
 
+function sendData(){pushCanv(); pushmsg();}
 var convRef = db.ref('ConversationData/'+"{{request.session.currconv}}"+'/');
 convRef.on('value', function(snapshot){
   //var convData =snapshot.val();
@@ -82,9 +92,9 @@ convRef.on('value', function(snapshot){
 
 </div>
 <div id = "chatInfo" style="position: absolute; width: 50%; left: 25%; top:1%;">
-  <b style="border: 2px solid black;">Title: {{request.session.convTitle}}</b>
+  <b>Title: {{request.session.convTitle}}</b>
   <br />
-  <b style="border:2px solid black;">Recipient:
+  <b >Recipient:
     {% for c in request.session.convRecip %}
       {{c}} <span> , </span>
     {%endfor%}
@@ -95,24 +105,23 @@ convRef.on('value', function(snapshot){
     {% include 'msgbox.html' %}
   </div>
 </div>
-<button id="showCanvas" onclick="showCanvas()">+</button>
-<div id="typemsg" style="text-align:center;">
+
+<div id="send">
+<div id ="flexDiv">
+<div id="typemsg">
 <p>
   <textarea id ="message" name="message"
   rows="6" cols="30" placeholder="Type a message here"></textarea>
 </p>
-<p>
-  <input type = "submit" value="Send"  id="formbutton" onclick="pushmsg()"/>
-</p>
 </div>
 
-
-
-<div id="canvasDiv" style="display:none">
+<div id="canvasDiv">
 <canvas id="canvas" height="60" width="210" style="border:1px solid #000000; background-color: white;"></canvas>
-<button id="hideCanvas" onclick="hideCanvas()">X</button>
 
-<button id="submitCanvas" onclick="pushCanv()">Send</button>
+
+</div>
+</div>
+<input type = "submit" value="Send"  id="formbutton" class="sendbutton" onclick="sendData()"/>
 </div>
 </body>
 </html>

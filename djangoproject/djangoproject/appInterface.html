@@ -11,11 +11,20 @@
 <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
+var prevId = null;
 function f(id)
 {
   document.getElementById('{{enter.convID.auto_id}}').value = id;
   document.getElementById('key').style.display = 'block';
   document.getElementById('id01').style.display = 'none';
+  docBody = document.body;
+  newChatButton = document.getElementById("newChatButton"); //Tried to get background color of this element to use, but it doesnt select
+  document.getElementById(id).style.backgroundColor = "#7bc4a0";
+  if (prevId != null)
+  {
+  document.getElementById(prevId).style.backgroundColor = docBody.style.backgroundColor;
+  }
+  prevId = id;
 }
 function newChat()
 {
@@ -38,7 +47,7 @@ function newChat()
       Click on one of the conversations or make a new one!
     </p>
   </div>
-  <div id="newChat"><button onclick="newChat()">Make New Chat</button></div>
+  <div id="newChat"><button id="newChatButton" onclick="newChat()">Make New Chat</button></div>
 
 <div id="id01" class="modal">
     <form method="POST" id="newConv">
@@ -59,12 +68,13 @@ function newChat()
     </form>
     <button type="button" onclick="document.getElementById('id01').style.display='none';" id="cancel">Cancel</button>
 </div>
+  <b style="position:absolute; left:25%; top:12%;">Conversations</b>
 <div id = "conversations" style="overflow-y: scroll; ">
-  <b style="border: 2px solid black;">Conversations</b>
   {% for c in convs %}
-    <div id="chat" class="chats"
+    <div id="{{c.id}}" class="chats"
     onclick="f('{{c.id}}')">
       {{c.title}}<br/>{{c.dateTimeStamp}}</div>
+      <hr />
   {% endfor %}
 </div>
 
