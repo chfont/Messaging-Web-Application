@@ -116,11 +116,11 @@ def settings(request):
     if(request.method== 'POST'):
         form = ThemeSelect(request.POST)
         if form.is_valid():
-            print(form.cleaned_data['id'])
-            updateThemeID(request.session['uid'], form.cleaned_data['id'])
-            request.session['theme'] = form.cleaned_data['id']
-            request.session['themeCSS'] = request.session['theme'] +".css"
-            request.session.modified = True
+            if form.cleaned_data['id'] != "":
+                updateThemeID(request.session['uid'], form.cleaned_data['id'])
+                request.session['theme'] = form.cleaned_data['id']
+                request.session['themeCSS'] = request.session['theme'] +".css"
+                request.session.modified = True
     else:
         form = ThemeSelect()
 

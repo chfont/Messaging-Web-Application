@@ -18,6 +18,7 @@ class NewConv(forms.Form):
 
 
 THEMES =[
+    ("", "Select a Theme"),
     ("default", "Default"),
     ("light", "Light"),
     ("dark", "Dark")
@@ -33,7 +34,7 @@ class ThemeSelect(forms.Form):
     id = forms.CharField(label="Select Theme:", widget=forms.Select(choices=THEMES, attrs={'onchange': 'this.form.submit()', 'id':'formbutton'}))
 
 class SortSelect(forms.Form):
-    sortId = forms.CharField(widget=forms.Select(choices=SORT, attrs={'onchange': 'this.form.submit();', 'id':'formbutton'}))
+    sortId = forms.CharField(widget=forms.Select(choices=SORT, attrs={'placeholder': 'Select', 'onclick': 'this.form.submit();', 'id':'formbutton'}))
 
 class ConvEnter(forms.Form):
     convID = forms.CharField(widget=forms.HiddenInput())
