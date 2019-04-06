@@ -20,6 +20,8 @@ def retrieveUserData(id):
 
 def addConv(id, convT, convK, convRs, username):
     reps = convRs.split(",")
+    for i in reps:
+        i = i.strip()
     reps.append(username)
     data = {"name": convT, "key": convK, "lastSent": time(),"recipients": reps}
     data2 = {"name": convT, "lastSent": time(), "recipients": reps}
