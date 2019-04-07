@@ -31,8 +31,21 @@ function newChat()
   document.getElementById('key').style.display='none';
   document.getElementById('id01').style.display='block';
 }
+function utcToLocal()
+{
+  var convs = document.getElementsByClassName('datetime');
+  var conv_values;
+  var newDate;
+  for(var i = 0; i < convs.length; i++)
+  {
+    conv_values = convs[i].innerText;
+    conv_values *= 1000;
+    newDate = new Date(conv_values);
+    convs[i].innerText = newDate.toLocaleString();
+  }
+}
 </script>
-<body>
+<body onload = "utcToLocal()">
   <script src="{% static 'mainInterface.js'%}"></script>
 
   <div class = "mainpane">
@@ -73,7 +86,11 @@ function newChat()
   {% for c in convs %}
     <div id="{{c.id}}" class="chats"
     onclick="f('{{c.id}}')">
-      {{c.title}}<br/>{{c.dateTimeStamp}}</div>
+      {{c.title}}<br/>
+      <span class = "datetime">
+        {{c.timeStamp}}
+      </span>
+    </div>
       <hr />
   {% endfor %}
 </div>
