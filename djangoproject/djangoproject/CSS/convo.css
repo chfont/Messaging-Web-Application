@@ -5,6 +5,7 @@
   left: 25%;
   top:10%;
   height: 40%;
+  overflow: auto;
 }
 
 #message
@@ -54,3 +55,4 @@
   height: auto;
   padding: 5px;
 }
+

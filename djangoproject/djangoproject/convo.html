@@ -65,9 +65,13 @@ function pushCanv()
 }
 function showCanvas(){document.getElementById('canvasDiv').style.display="block";}
 function hideCanvas(){document.getElementById('canvasDiv').style.display="none"; clearCanv();}
-var msgarea = document.getElementById('chatbox');
 
-function scroll(){$('#conversations').scrollTop($('#conversations')[0].scrollHeight);}
+function scrollToBottom()
+{
+  var element = document.getElementById("conversations");
+  element.scrollLeft = 50;
+  element.scrollTop = 100000;
+}
 
 function sendData(){pushCanv(); pushmsg();}
 var convRef = db.ref('ConversationData/'+"{{request.session.currconv}}"+'/');
@@ -75,7 +79,6 @@ convRef.on('value', function(snapshot){
   //var convData =snapshot.val();
   //var keyArr= Object.keys(snapshot.val());
   //keyArr.forEach(function(k){renderMSG(convData[k]));
-  scroll();
   $('.chatbox').html('').load('{% url "msgbox" %}');
 });
 </script>
@@ -89,7 +92,7 @@ convRef.on('value', function(snapshot){
     <form action="appInterface.html" id="return">
         <input type="submit" value = "Back to Home Page" id="formbutton"></input>
     </form>
-
+    <button onclick = "scrollToBottom()">Scroll to most recent message</button>
 </div>
 <div id = "chatInfo" style="position: absolute; width: 50%; left: 25%; top:1%;">
   <b>Title: {{request.session.convTitle}}</b>
@@ -101,7 +104,7 @@ convRef.on('value', function(snapshot){
   </b>
 </div>
 <div id = "conversations" style="overflow-y: scroll">
-  <div class="chatbox">
+  <div class="chatbox" id = "chatboxid">
     {% include 'msgbox.html' %}
   </div>
 </div>
